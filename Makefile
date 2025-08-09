@@ -1,8 +1,16 @@
 NAME 		= cub3D
-FLAGS		= -Wall -Wextra -Werror -lglfw -lm -ldl -lX11 -g
+CFLAGS		= -Wall -Wextra -Werror -g
 LIBMLX 		= ./libs/MLX42
 MY_LIBRARY	= ./libs/My_library
 LIBS		= $(LIBMLX)/build/libmlx42.a $(MY_LIBRARY)/my_library.a
+
+UNAME = $(shell uname -s)
+ifeq ($(UNAME), linux)
+	LDFLAGS = -lglfw -lm -ldl -lX11
+endif
+ifeq ($(UNAME), darwin)
+	LDFLAGS = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
+endif
 
 GREEN = \033[0;32m
 BLUE = \033[0;34m
@@ -13,7 +21,7 @@ RED = \033[0;31m
 RESET = \033[0m
 
 
-SRCS = 
+SRCS = ./main.c
 
 OFILES = $(SRCS:.c=.o)
 
@@ -28,7 +36,7 @@ libft:
 	@make --no-print-directory -C libs/My_library
 
 $(NAME): $(LIBS) $(OFILES)
-	@$(CC) $(FLAGS) $(OFILES) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OFILES) $(LIBS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)cube3D compiled successfully!$(RESET)"
 
 clean:
