@@ -36,7 +36,7 @@ char	*read_map(int fd)
 	if (fd < 0)
 	{
 		free(file);
-		ft_printf("ERROR:\nInvalid file name!!");
+		printf("ERROR:\nInvalid file name!!");
 		return (NULL);
 	}
 	while (1)

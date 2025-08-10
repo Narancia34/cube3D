@@ -13,7 +13,7 @@ RED = \033[0;31m
 RESET = \033[0m
 
 
-SRCS = 
+SRCS = main.c ./parcing/parce_map.c
 
 OFILES = $(SRCS:.c=.o)
 
