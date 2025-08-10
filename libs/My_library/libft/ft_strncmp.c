@@ -6,7 +6,7 @@
 /*   By: fbicane <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:51:35 by fbicane           #+#    #+#             */
-/*   Updated: 2025/01/29 15:35:26 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/10 10:37:28 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	size_t	i;
 
 	if (n == 0)
-		return (0);
+		n = ft_strlen(s1);
 	if (!s1 && !s2)
 		return (0);
 	i = 0;
