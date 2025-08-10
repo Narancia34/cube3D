@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/09 22:18:10 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/10 11:17:59 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "./libs/MLX42/include/MLX42/MLX42.h"
+# include "./libs/My_library/my_library.h"
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -22,13 +23,33 @@
 # include <stdbool.h>
 # include <sys/time.h>
 # include <errno.h>
+# include <fcntl.h>
 
 typedef struct s_parce t_parce;
 
+// INFO: colors
+/*-----------------------------------------------*/
+# ifndef BLUE
+#  define BLUE  "\001\033[34m\002"
+# endif
+# ifndef GREEN
+#  define GREEN "\001\033[32m\002"
+# endif
+# ifndef RED
+#  define RED   "\001\033[31m\002"
+# endif
+# ifndef YELLOW
+#  define YELLOW "\001\033[0;33m\002"
+# endif
+# ifndef RESET
+#  define RESET "\001\033[0m\002"
+# endif
+/*-----------------------------------------------*/
 
 // INFO: Game main struct
 /*-----------------------------------------------*/
 typedef struct s_cub3d {
+	mlx_t	*mlx;
 	t_parce	*parce;
 }	t_cub3d;
 /*-----------------------------------------------*/
