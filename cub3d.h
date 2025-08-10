@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/09 22:18:10 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/10 11:46:21 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdbool.h>
 # include <sys/time.h>
 # include <errno.h>
+# include <fcntl.h>
+# include "./libs/My_library/my_library.h"
 
 typedef struct s_parce t_parce;
 
@@ -46,5 +48,12 @@ struct s_parce {
 	int			ceiling_color[3];
 };
 /*-----------------------------------------------*/
+
+
+int	parce_map(t_cub3d *game, char **av);
+char	**get_map(t_cub3d *game, char **av);
+char	*read_map(int fd);
+int	check_file(char **av);
+
 
 #endif

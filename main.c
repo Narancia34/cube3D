@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:45:33 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/09 21:38:02 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/10 12:13:33 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 int main(int ac, char **av)
 {
+	t_cub3d	game;
+	ft_memset(&game, 0, sizeof(t_cub3d));
+	parce_map(&game, av);
 	return (0);
 }
