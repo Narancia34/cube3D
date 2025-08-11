@@ -5,11 +5,14 @@ MY_LIBRARY	= ./libs/My_library
 LIBS		= $(LIBMLX)/build/libmlx42.a $(MY_LIBRARY)/my_library.a
 
 UNAME = $(shell uname -s)
+BREW_PATH = $(shell brew --prefix)
+
 ifeq ($(UNAME), Linux)
 	LDFLAGS = -lglfw -lm -ldl -lX11
 endif
 ifeq ($(UNAME), Darwin)
-	LDFLAGS = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
+	CFLAGS += -I$(BREW_PATH)/include
+	LDFLAGS = -L$(BREW_PATH)/lib -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 endif
 
 GREEN = \033[0;32m
@@ -21,7 +24,8 @@ RED = \033[0;31m
 RESET = \033[0m
 
 
-SRCS =	$(shell ls ./parsing/*.c) \
+SRCS =
+		$(shell ls ./parsing/*.c) \
 		$(shell ls ./error_handling/*.c) \
 		./main.c \
 
