@@ -14,6 +14,8 @@
 
 void	destroy_parcing(t_cub3d *game)
 {
+	if (NULL == game)
+		exit(1);
 	mlx_delete_image(game->mlx, game->parce->north_texture);
 	mlx_delete_image(game->mlx, game->parce->south_texture);
 	mlx_delete_image(game->mlx, game->parce->west_texture);

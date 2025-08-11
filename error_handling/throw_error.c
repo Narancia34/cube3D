@@ -6,22 +6,28 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 21:00:43 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/10 21:18:25 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/11 13:01:54 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	parce_error(int error_code, t_cub3d *game)
+void	parse_error(int error_code, t_cub3d *game)
 {
 	if (1 == error_code)
 	{
-		printf(RED"Each element must contain type identifier followed by its specific information"RESET);
-		destroy_parcing(game);
+		printf(RED"Error:\nEach element must contain type identifier");
+		printf(" followed by its specific information.\n"RESET);
 	}
 	else if (2 == error_code)
+		printf(RED"Error:\nFailed loading textures.\n"RESET);
+	else if (3 == error_code)
+		printf(RED"Error:\nR,G,B colors in range [0,255].\n"RESET);
+	else if (4 == error_code)
+		printf(RED"Error:\nUnexpected element in the file.\n");
+	else if (5 == error_code)
 	{
-		printf(RED"Failed loading textures\n"RESET);
-		destroy_parcing(game);
+		printf(RED"Error:\nFile doesn't exist.\n"RESET);
 	}
+	destroy_parcing(game);
 }

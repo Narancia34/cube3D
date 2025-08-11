@@ -12,12 +12,13 @@
 
 # include "../cub3d.h"
 
-bool	parce_file(char **av, t_cub3d *game)
+void	parse_file(char **av, t_cub3d *game)
 {
 	int	cub_file;
 
 	cub_file = open(av[1], O_RDONLY);
 	if (-1 == cub_file)
-		return (false);
-	return (true);
+		parse_error(5, NULL);
+	parse_elements(cub_file, game);
+	printf(GREEN"Parsing done correctlly\n");
 }

@@ -68,9 +68,16 @@ struct s_parce {
 };
 /*-----------------------------------------------*/
 
+// INFO: parcing functions
+/*-----------------------------------------------*/
+void	parse_rgb(char **element, t_cub3d *game);
+void	parse_elements(int cub_file, t_cub3d *game);
+void	parse_file(char **av, t_cub3d *game);
+/*-----------------------------------------------*/
+
 // INFO: error handling
 /*-----------------------------------------------*/
-void	parce_error(int error_code, t_cub3d *game);
+void	parse_error(int error_code, t_cub3d *game);
 void	destroy_parcing(t_cub3d *game);
 /*-----------------------------------------------*/
 
