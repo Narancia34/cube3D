@@ -5,10 +5,10 @@ MY_LIBRARY	= ./libs/My_library
 LIBS		= $(LIBMLX)/build/libmlx42.a $(MY_LIBRARY)/my_library.a
 
 UNAME = $(shell uname -s)
-ifeq ($(UNAME), linux)
+ifeq ($(UNAME), Linux)
 	LDFLAGS = -lglfw -lm -ldl -lX11
 endif
-ifeq ($(UNAME), darwin)
+ifeq ($(UNAME), Darwin)
 	LDFLAGS = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 endif
 
@@ -29,10 +29,12 @@ OFILES = $(SRCS:.c=.o)
 
 all: libmlx libft $(NAME)
 
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build >/dev/null && \
-	make -C $(LIBMLX)/build -j4 >/dev/null
+	@cmake $(LIBMLX) -B $(LIBMLX)/build >/dev/null
+	@cmake --build $(LIBMLX)/build -j4 >/dev/null
 
 libft:
 	@make --no-print-directory -C libs/My_library
