@@ -6,7 +6,7 @@
 /*   By: fbicane <fatheddine04@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:12:10 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/10 10:15:06 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/10 21:59:51 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <string.h>
 # include <stdarg.h>
 # include <stdio.h>
+# include <limits.h>
 
 //get_next_line
 /*----------------------------------*/
