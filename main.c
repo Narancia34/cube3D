@@ -14,5 +14,10 @@
 
 int main(int ac, char **av)
 {
+	t_cub3d	game;
+
+	(void)ac;
+	game.mlx = mlx_init(500, 500, "parsing", false);
+	parse_file(av, &game);
 	return (0);
 }
