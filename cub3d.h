@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/10 11:17:59 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/10 22:03:18 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ struct s_parce {
 	int			floor_color[3];
 	int			ceiling_color[3];
 };
+/*-----------------------------------------------*/
+
+// INFO: error handling
+/*-----------------------------------------------*/
+void	parce_error(int error_code, t_cub3d *game);
+void	destroy_parcing(t_cub3d *game);
 /*-----------------------------------------------*/
 
 #endif
