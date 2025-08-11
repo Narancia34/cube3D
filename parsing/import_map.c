@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parce_map.c                                        :+:      :+:    :+:   */
+/*   import_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgamraou <mgamraou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/10 09:40:13 by mgamraou          #+#    #+#             */
-/*   Updated: 2025/08/10 11:48:50 by mgamraou         ###   ########.fr       */
+/*   Created: 2025/08/11 14:07:39 by mgamraou          #+#    #+#             */
+/*   Updated: 2025/08/11 14:26:26 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	check_file(char **av)
+static int	check_file(char **av)
 {
 	int	len;
 
@@ -26,7 +26,7 @@ int	check_file(char **av)
 	return (1);
 }
 
-char	*read_map(int fd)
+static char	*read_map(int fd)
 {
 	char	*file;
 	char	*temp;
@@ -36,7 +36,7 @@ char	*read_map(int fd)
 	if (fd < 0)
 	{
 		free(file);
-		printf("ERROR:\nInvalid file name!!");
+		printf(RED"Error:\nInvalid file name!"RESET);
 		return (NULL);
 	}
 	while (1)
@@ -61,7 +61,7 @@ char	**get_map(t_cub3d *game, char **av)
 	fd = open(av[1], O_RDWR);
 	if (fd < 0)
 	{
-		printf("ERROR:\nCannot open file!");
+		printf(RED"ERROR:\nCannot open file!"RESET);
 		exit(1);
 	}
 	file = read_map(fd);
@@ -71,16 +71,4 @@ char	**get_map(t_cub3d *game, char **av)
 	free(file);
 	close(fd);
 	return (map);
-}
-
-int	parce_map(t_cub3d *game, char **av)
-{
-	game->parce->map = get_map(game, av);
-	int	i = 0;
-	while (game->parce->map[i])
-	{
-		printf("%s\n", game->parce->map[i]);
-		i++;
-	}
-	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/10 11:46:21 by mgamraou         ###   ########.fr       */
+/*   Updated: 2025/08/11 14:17:41 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,38 @@
 # include <fcntl.h>
 # include "./libs/My_library/my_library.h"
 
-typedef struct s_parce t_parce;
+// INFO: colors
+/*-----------------------------------------------*/
+# ifndef BLUE
+#  define BLUE  "\001\033[34m\002"
+# endif
+# ifndef GREEN
+#  define GREEN "\001\033[32m\002"
+# endif
+# ifndef RED
+#  define RED   "\001\033[31m\002"
+# endif
+# ifndef YELLOW
+#  define YELLOW "\001\033[0;33m\002"
+# endif
+# ifndef RESET
+#  define RESET "\001\033[0m\002"
+# endif
+/*-----------------------------------------------*/
+
+typedef struct s_parse t_parse;
 
 
 // INFO: Game main struct
 /*-----------------------------------------------*/
 typedef struct s_cub3d {
-	t_parce	*parce;
+	t_parse	*parse;
 }	t_cub3d;
 /*-----------------------------------------------*/
 
 // INFO: parcing struct
 /*-----------------------------------------------*/
-struct s_parce {
+struct s_parse {
 	char		*file_name;
 	char		**map;
 	mlx_image_t	*north_texture;
@@ -46,14 +65,14 @@ struct s_parce {
 	mlx_image_t	*west_texture;
 	int			floor_color[3];
 	int			ceiling_color[3];
+	int			player;
+	char			player_direction;
 };
 /*-----------------------------------------------*/
 
 
-int	parce_map(t_cub3d *game, char **av);
+int	parse_map(t_cub3d *game, char **av);
 char	**get_map(t_cub3d *game, char **av);
-char	*read_map(int fd);
-int	check_file(char **av);
 
 
 #endif

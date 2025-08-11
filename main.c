@@ -16,7 +16,8 @@ int main(int ac, char **av)
 {
 	t_cub3d	game;
 	ft_memset(&game, 0, sizeof(t_cub3d));
-	game.parce = malloc(sizeof(t_parce));
-	parce_map(&game, av);
+	game.parse = malloc(sizeof(t_parse));
+	game.parse->player = 0;
+	parse_map(&game, av);
 	return (0);
 }
