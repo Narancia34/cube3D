@@ -60,7 +60,7 @@ static bool	is_rgb_in_range(t_cub3d *game, char element)
 
 static void	init_rgb(char **colors, char **element, t_cub3d *game)
 {
-	if (ft_strncmp(element[0], "F", 0))
+	if (!ft_strncmp(element[0], "F", 0))
 	{
 		game->parce->floor_color[0] = ft_atoi(colors[0]);
 		game->parce->floor_color[1] = ft_atoi(colors[1]);
@@ -69,7 +69,7 @@ static void	init_rgb(char **colors, char **element, t_cub3d *game)
 			return (free_arr(element),
 					free_arr(colors), parse_error(3, game));
 	}
-	else if (ft_strncmp(element[0], "C", 0))
+	else if (!ft_strncmp(element[0], "C", 0))
 	{
 		game->parce->ceiling_color[0] = ft_atoi(colors[0]);
 		game->parce->ceiling_color[1] = ft_atoi(colors[1]);

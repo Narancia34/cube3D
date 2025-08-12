@@ -24,8 +24,7 @@ RED = \033[0;31m
 RESET = \033[0m
 
 
-SRCS =
-		$(shell ls ./parsing/*.c) \
+SRCS =	$(shell ls ./parsing/*.c) \
 		$(shell ls ./error_handling/*.c) \
 		./main.c \
 

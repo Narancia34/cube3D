@@ -18,7 +18,7 @@ static char	**fetch_elemet(int cub_file, char **element)
 
 	free_arr(element);
 	file_line = get_next_line(cub_file);
-	while (ft_strncmp(file_line, "\n", 0))
+	while (!ft_strncmp(file_line, "\n", 0))
 	{
 		free(file_line);
 		file_line = get_next_line(cub_file);
@@ -38,6 +38,7 @@ static mlx_image_t	*init_texture(char **element, t_cub3d *game)
 		get_next_line(-1);
 		parse_error(1, game);
 	}
+	element[1][ft_strlen(element[1]) - 1] = '\0';
 	texture = mlx_load_png(element[1]);
 	if (NULL == texture)
 	{
@@ -52,17 +53,14 @@ static mlx_image_t	*init_texture(char **element, t_cub3d *game)
 
 static void	parse_texture(char **element, t_cub3d *game)
 {
-	mlx_texture_t	*texture;
-
-	texture = NULL;
-	if (ft_strncmp(element[0], "NO", 0))
+	if (!ft_strncmp(element[0], "NO", 0))
 		game->parce->north_texture = init_texture(element, game);
-	else if (ft_strncmp(element[0], "SO", 0))
-		game->parce->south_texture = mlx_texture_to_image(game->mlx, texture);
-	else if (ft_strncmp(element[0], "WE", 0))
-		game->parce->west_texture = mlx_texture_to_image(game->mlx, texture);
-	else if (ft_strncmp(element[0], "EA", 0))
-		game->parce->east_texture = mlx_texture_to_image(game->mlx, texture);
+	else if (!ft_strncmp(element[0], "SO", 0))
+		game->parce->south_texture = init_texture(element, game);
+	else if (!ft_strncmp(element[0], "WE", 0))
+		game->parce->west_texture = init_texture(element, game);
+	else if (!ft_strncmp(element[0], "EA", 0))
+		game->parce->east_texture = init_texture(element, game);
 	else
 		parse_rgb(element, game);
 }
@@ -74,7 +72,7 @@ void	parse_elements(int cub_file, t_cub3d *game)
 
 	element = NULL;
 	element_parsed = 0;
-	while (element_parsed < 5)
+	while (element_parsed < 6)
 	{
 		element = fetch_elemet(cub_file, element);
 		parse_texture(element, game);
