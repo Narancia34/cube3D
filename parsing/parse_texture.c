@@ -12,18 +12,22 @@
 
 #include "../cub3d.h"
 
-static char	**fetch_elemet(int cub_file, char **element)
+static char	**fetch_elemet(int cub_file)
 {
 	char	*file_line;
+	char	**element;
 
-	free_arr(element);
+	file_line = NULL;
+	element = NULL;
 	file_line = get_next_line(cub_file);
 	while (!ft_strncmp(file_line, "\n", 0))
 	{
 		free(file_line);
 		file_line = get_next_line(cub_file);
 	}
-	return (ft_split(file_line, ' '));
+	element = ft_split(file_line, ' ');
+	free(file_line);
+	return (element);
 }
 
 static mlx_image_t	*init_texture(char **element, t_cub3d *game)
@@ -74,9 +78,11 @@ void	parse_elements(int cub_file, t_cub3d *game)
 	element_parsed = 0;
 	while (element_parsed < 6)
 	{
-		element = fetch_elemet(cub_file, element);
+		free_arr(element);
+		element = fetch_elemet(cub_file);
 		parse_texture(element, game);
 		element_parsed++;
 	}
 	free_arr(element);
+	get_next_line(-1);
 }

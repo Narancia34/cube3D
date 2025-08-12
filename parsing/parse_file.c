@@ -22,5 +22,6 @@ void	parse_file(char **av, t_cub3d *game)
 	if (-1 == cub_file)
 		parse_error(5, NULL);
 	parse_elements(cub_file, game);
+	close(cub_file);
 	printf(GREEN"Parsing done correctlly\n"RESET);
 }
