@@ -14,7 +14,7 @@
 
 static char	**extract_rgb(char **element, t_cub3d *game)
 {
-	char **colors;
+	char	**colors;
 
 	if (NULL != element[2])
 	{
@@ -33,52 +33,44 @@ static char	**extract_rgb(char **element, t_cub3d *game)
 	return (colors);
 }
 
-static bool	is_rgb_in_range(t_cub3d *game, char element)
+static bool	is_rgb_in_range(int *rgb)
 {
-	int	r;
-	int	g;
-	int	b;
+	return ((rgb[0] >= 0 && rgb[0] <= 255)
+		&& (rgb[1] >= 0 && rgb[1] <= 255)
+		&& (rgb[2] >= 0 && rgb[2] <= 255));
+}
 
-	if ('F' == element)
+static bool	asign_rgb(char **colors, char **element, t_cub3d *game)
+{
+	int	rgb[3];
+
+	rgb[0] = ft_atoi(colors[0]);
+	rgb[1] = ft_atoi(colors[1]);
+	rgb[2] = ft_atoi(colors[2]);
+	if (!is_rgb_in_range(rgb))
+		return (free_arr(element), free_arr(colors),
+			parse_error(3, game), false);
+	else if (ft_strncmp(element[0], "F", 0)
+		|| ft_strncmp(element[0], "C", 0))
+		return (false);
+	if (!ft_strncmp(element[0], "F", 0))
 	{
-		r = game->parse.floor_color[0];
-		g = game->parse.floor_color[1];
-		b = game->parse.floor_color[2];
-		return ((r >= 0 && r <= 255) && (g >= 0 && g <= 255)
-				&& (b >= 0 && b <= 255));
+		game->parse.floor_color[0] = rgb[0];
+		game->parse.floor_color[1] = rgb[1];
+		game->parse.floor_color[2] = rgb[2];
 	}
-	else if ('C' == element)
+	else if (!ft_strncmp(element[0], "C", 0))
 	{
-		r = game->parse.ceiling_color[0];
-		g = game->parse.ceiling_color[1];
-		b = game->parse.ceiling_color[2];
-		return ((r >= 0 && r <= 255) && (g >= 0 && g <= 255)
-				&& (b >= 0 && b <= 255));
+		game->parse.ceiling_color[0] = rgb[0];
+		game->parse.ceiling_color[1] = rgb[1];
+		game->parse.ceiling_color[2] = rgb[2];
 	}
-	return (false);
+	return (true);
 }
 
 static void	init_rgb(char **colors, char **element, t_cub3d *game)
 {
-	if (!ft_strncmp(element[0], "F", 0))
-	{
-		game->parse.floor_color[0] = ft_atoi(colors[0]);
-		game->parse.floor_color[1] = ft_atoi(colors[1]);
-		game->parse.floor_color[2] = ft_atoi(colors[2]);
-		if (!is_rgb_in_range(game, 'F'))
-			return (free_arr(element),
-					free_arr(colors), parse_error(3, game));
-	}
-	else if (!ft_strncmp(element[0], "C", 0))
-	{
-		game->parse.ceiling_color[0] = ft_atoi(colors[0]);
-		game->parse.ceiling_color[1] = ft_atoi(colors[1]);
-		game->parse.ceiling_color[2] = ft_atoi(colors[2]);
-		if (!is_rgb_in_range(game, 'C'))
-			return (free_arr(element),
-					free_arr(colors), parse_error(3, game));
-	}
-	else
+	if (!asign_rgb(colors, element, game))
 	{
 		free_arr(element);
 		free_arr(colors);
