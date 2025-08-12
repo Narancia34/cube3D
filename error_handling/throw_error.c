@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 21:00:43 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/11 13:01:54 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/12 19:37:57 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ void	parse_error(int error_code, t_cub3d *game)
 	{
 		printf(RED"Error:\nFile doesn't exist.\n"RESET);
 	}
+	else if (6 == error_code)
+		printf(RED"Error:\nMissing a .cub file"RESET);
 	destroy_parcing(game);
 }

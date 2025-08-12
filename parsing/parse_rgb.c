@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_colors.c                                     :+:      :+:    :+:   */
+/*   parse_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:47:55 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/11 12:55:30 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/12 19:04:36 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static char	**extract_rgb(char **element, t_cub3d *game)
 		parse_error(1, game);
 	}
 	colors = ft_split(element[1], ',');
+	check_rgb_values(colors, element, game);
 	if (NULL != colors[3])
 	{
 		free_arr(element);
@@ -51,7 +52,7 @@ static bool	asign_rgb(char **colors, char **element, t_cub3d *game)
 		return (free_arr(element), free_arr(colors),
 			parse_error(3, game), false);
 	else if (ft_strncmp(element[0], "F", 0)
-		|| ft_strncmp(element[0], "C", 0))
+		&& ft_strncmp(element[0], "C", 0))
 		return (false);
 	if (!ft_strncmp(element[0], "F", 0))
 	{
@@ -76,6 +77,7 @@ static void	init_rgb(char **colors, char **element, t_cub3d *game)
 		free_arr(colors);
 		parse_error(4, game);
 	}
+	free_arr(colors);
 }
 
 void	parse_rgb(char **element, t_cub3d *game)

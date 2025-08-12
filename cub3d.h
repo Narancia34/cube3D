@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/10 22:03:18 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/12 18:48:02 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_cub3d {
 void	parse_rgb(char **element, t_cub3d *game);
 void	parse_elements(int cub_file, t_cub3d *game);
 void	parse_file(char **av, t_cub3d *game);
+void	check_rgb_values(char **colors, char **element, t_cub3d *game);
 /*-----------------------------------------------*/
 
 // INFO: error handling

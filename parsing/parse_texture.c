@@ -78,4 +78,5 @@ void	parse_elements(int cub_file, t_cub3d *game)
 		parse_texture(element, game);
 		element_parsed++;
 	}
+	free_arr(element);
 }
