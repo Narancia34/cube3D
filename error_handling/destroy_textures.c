@@ -16,11 +16,11 @@ void	destroy_parcing(t_cub3d *game)
 {
 	if (NULL == game)
 		exit(1);
-	mlx_delete_image(game->mlx, game->parce->north_texture);
-	mlx_delete_image(game->mlx, game->parce->south_texture);
-	mlx_delete_image(game->mlx, game->parce->west_texture);
-	mlx_delete_image(game->mlx, game->parce->east_texture);
-	free_arr(game->parce->map);
+	mlx_delete_image(game->mlx, game->parse.north_texture);
+	mlx_delete_image(game->mlx, game->parse.south_texture);
+	mlx_delete_image(game->mlx, game->parse.west_texture);
+	mlx_delete_image(game->mlx, game->parse.east_texture);
+	free_arr(game->parse.map);
 	mlx_terminate(game->mlx);
 	exit(1);
 }

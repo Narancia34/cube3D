@@ -25,8 +25,6 @@
 # include <errno.h>
 # include <fcntl.h>
 
-typedef struct s_parce t_parce;
-
 // INFO: colors
 /*-----------------------------------------------*/
 # ifndef BLUE
@@ -46,17 +44,10 @@ typedef struct s_parce t_parce;
 # endif
 /*-----------------------------------------------*/
 
-// INFO: Game main struct
-/*-----------------------------------------------*/
-typedef struct s_cub3d {
-	mlx_t	*mlx;
-	t_parce	*parce;
-}	t_cub3d;
-/*-----------------------------------------------*/
 
 // INFO: parcing struct
 /*-----------------------------------------------*/
-struct s_parce {
+typedef struct s_parse {
 	char		*file_name;
 	char		**map;
 	mlx_image_t	*north_texture;
@@ -65,8 +56,18 @@ struct s_parce {
 	mlx_image_t	*west_texture;
 	int			floor_color[3];
 	int			ceiling_color[3];
-};
+}t_parse;
 /*-----------------------------------------------*/
+
+
+// INFO: Game main struct
+/*-----------------------------------------------*/
+typedef struct s_cub3d {
+	mlx_t	*mlx;
+	t_parse	parse;
+}	t_cub3d;
+/*-----------------------------------------------*/
+
 
 // INFO: parcing functions
 /*-----------------------------------------------*/

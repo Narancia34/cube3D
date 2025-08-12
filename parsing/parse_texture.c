@@ -54,13 +54,13 @@ static mlx_image_t	*init_texture(char **element, t_cub3d *game)
 static void	parse_texture(char **element, t_cub3d *game)
 {
 	if (!ft_strncmp(element[0], "NO", 0))
-		game->parce->north_texture = init_texture(element, game);
+		game->parse.north_texture = init_texture(element, game);
 	else if (!ft_strncmp(element[0], "SO", 0))
-		game->parce->south_texture = init_texture(element, game);
+		game->parse.south_texture = init_texture(element, game);
 	else if (!ft_strncmp(element[0], "WE", 0))
-		game->parce->west_texture = init_texture(element, game);
+		game->parse.west_texture = init_texture(element, game);
 	else if (!ft_strncmp(element[0], "EA", 0))
-		game->parce->east_texture = init_texture(element, game);
+		game->parse.east_texture = init_texture(element, game);
 	else
 		parse_rgb(element, game);
 }

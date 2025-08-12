@@ -15,21 +15,24 @@
 
 void	set_game_parse(t_cub3d *game)
 {
-	game->parce->map = NULL;
-	game->parce->east_texture = NULL;
-	game->parce->north_texture = NULL;
-	game->parce->south_texture = NULL;
-	game->parce->west_texture = NULL;
-	game->parce->file_name = NULL;
+	game->parse.file_name = NULL;
+	game->parse.map = NULL;
+	game->parse.north_texture = NULL;
+	game->parse.south_texture = NULL;
+	game->parse.east_texture = NULL;
+	game->parse.west_texture = NULL;
 }
 
 int main(int ac, char **av)
 {
+	(void)ac;
+
 	t_cub3d	game;
 
 	set_game_parse(&game);
-	(void)ac;
 	game.mlx = mlx_init(500, 500, "parsing", false);
 	parse_file(av, &game);
+	// mlx_loop(game.mlx);
+	destroy_parcing(&game);
 	return (0);
 }
