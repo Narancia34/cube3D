@@ -19,5 +19,6 @@ int main(int ac, char **av)
 	game.parse = malloc(sizeof(t_parse));
 	game.parse->player = 0;
 	parse_map(&game, av);
+	free(game.parse);
 	return (0);
 }

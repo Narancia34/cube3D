@@ -6,7 +6,7 @@
 /*   By: mgamraou <mgamraou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 09:40:13 by mgamraou          #+#    #+#             */
-/*   Updated: 2025/08/11 14:25:41 by mgamraou         ###   ########.fr       */
+/*   Updated: 2025/08/12 17:40:47 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,23 @@ int	parse_map(t_cub3d *game, char **av)
 	game->parse->map = get_map(game, av);
 	if (check_map_components(game) == 0)
 		return (0);
-	int i = -1;
-	while (game->parse->map[++i])
-		printf("%s\n", game->parse->map[i]);
+	char **map_copy = copy_map(game);
+	find_player_position(game);
+	map_copy[game->parse->pyp][game->parse->pxp] = '0';
+	flood_fill(map_copy, game->parse->pxp, game->parse->pyp);
+	int j = -1;
+	while (map_copy[++j])
+		printf("%s\n", map_copy[j]);
+	free_map_copy(map_copy, game->parse->rows);
+	j = 0;
+	if (game->parse->map)
+	{
+		while (game->parse->map[j])
+		{
+			free(game->parse->map[j]);
+			j++;
+		}
+		free(game->parse->map);
+	}
 	return 1;
 }

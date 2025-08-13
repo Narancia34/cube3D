@@ -13,7 +13,7 @@ RED = \033[0;31m
 RESET = \033[0m
 
 
-SRCS = main.c ./parsing/parse_map.c ./parsing/import_map.c
+SRCS = main.c ./parsing/parse_map.c ./parsing/import_map.c ./parsing/flood_fill.c
 
 OFILES = $(SRCS:.c=.o)
 

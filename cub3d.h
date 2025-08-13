@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/11 14:17:41 by mgamraou         ###   ########.fr       */
+/*   Updated: 2025/08/12 17:40:19 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,19 @@ struct s_parse {
 	int			ceiling_color[3];
 	int			player;
 	char			player_direction;
+	int			pxp;
+	int			pyp;
+	int			rows;
 };
 /*-----------------------------------------------*/
 
 
 int	parse_map(t_cub3d *game, char **av);
 char	**get_map(t_cub3d *game, char **av);
+char	**copy_map(t_cub3d *game);
+void	free_map_copy(char **map_copy, int rows);
+void	find_player_position(t_cub3d *game);
+void	flood_fill(char **map, int x, int y);
 
 
 #endif
