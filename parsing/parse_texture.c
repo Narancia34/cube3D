@@ -38,7 +38,7 @@ static mlx_image_t	*init_texture(char **element, t_cub3d *game)
 	if (NULL != element[2])
 	{
 		free_arr(element);
-		// WARN: check the get_next_line(-1);
+		// // WARN: check the get_next_line(-1);
 		get_next_line(-1);
 		parse_error(1, game);
 	}

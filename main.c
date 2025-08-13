@@ -30,7 +30,7 @@ int main(int ac, char **av)
 	t_cub3d	game;
 
 	set_game_parse(&game);
-	game.mlx = mlx_init(500, 500, "parsing", false);
+	game.mlx = mlx_init(500, 500, "parsing", true);
 	parse_file(av, &game);
 	// mlx_loop(game.mlx);
 	destroy_parcing(&game);
