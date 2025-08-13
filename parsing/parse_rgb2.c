@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 18:37:37 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/12 18:58:49 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/13 12:07:49 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static bool is_numbers(char **colors)
 
 void	check_rgb_values(char **colors, char **element, t_cub3d *game)
 {
-	colors[2][ft_strlen(colors[2]) - 1] = '\0';
+	// colors[2][ft_strlen(colors[2]) - 1] = '\0';
 	if (!is_numbers(colors))
 	{
 		free_arr(colors);

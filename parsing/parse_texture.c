@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parce_texture.c                                    :+:      :+:    :+:   */
+/*   parse_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 09:56:03 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/10 22:06:58 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/13 12:07:23 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static mlx_image_t	*init_texture(char **element, t_cub3d *game)
 		get_next_line(-1);
 		parse_error(1, game);
 	}
-	element[1][ft_strlen(element[1]) - 1] = '\0';
+	// element[1][ft_strlen(element[1]) - 1] = '\0';
 	texture = mlx_load_png(element[1]);
 	if (NULL == texture)
 	{
