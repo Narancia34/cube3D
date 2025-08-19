@@ -65,8 +65,11 @@ static void	parse_texture(char **element, t_cub3d *game)
 		game->parse.west_texture = init_texture(element, game);
 	else if (!ft_strncmp(element[0], "EA", 0))
 		game->parse.east_texture = init_texture(element, game);
-	else
+	else if (!ft_strncmp(element[0], "F", 0)
+		|| !ft_strncmp(element[0], "C", 0))
 		parse_rgb(element, game);
+	else
+		parse_error(4, game);
 }
 
 void	parse_elements(int cub_file, t_cub3d *game)

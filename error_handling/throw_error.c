@@ -26,9 +26,7 @@ void	parse_error(int error_code, t_cub3d *game)
 	else if (4 == error_code)
 		printf(RED"Error:\nUnexpected element in the file.\n");
 	else if (5 == error_code)
-	{
 		printf(RED"Error:\nFile doesn't exist.\n"RESET);
-	}
 	else if (6 == error_code)
 		printf(RED"Error:\nMissing a .cub file"RESET);
 	destroy_parcing(game);
