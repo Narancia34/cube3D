@@ -20,6 +20,8 @@ static char	**fetch_elemet(int cub_file)
 	file_line = NULL;
 	element = NULL;
 	file_line = get_next_line(cub_file);
+	// WARN: file_line dosent contain "\n"
+	// wrong check!
 	while (!ft_strncmp(file_line, "\n", 0))
 	{
 		free(file_line);
