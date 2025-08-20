@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:45:33 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/09 21:38:02 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/10 12:13:33 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ void	set_game_parse(t_cub3d *game)
 int main(int ac, char **av)
 {
 	(void)ac;
-
 	t_cub3d	game;
-
+	ft_memset(&game, 0, sizeof(t_cub3d));
+	game.parse = malloc(sizeof(t_parse));
+	game.parse->player = 0;
 	set_game_parse(&game);
 	game.mlx = mlx_init(500, 500, "parsing", true);
 	parse_file(av, &game);
-	// mlx_loop(game.mlx);
-	destroy_parcing(&game);
+	parse_map(&game, av);
+	destroy_parsing(&game);
 	return (0);
 }

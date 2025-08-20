@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/12 18:48:02 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/12 17:40:19 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/time.h>
 # include <errno.h>
 # include <fcntl.h>
+# include "./libs/My_library/my_library.h"
 
 // INFO: colors
 /*-----------------------------------------------*/
@@ -44,10 +45,21 @@
 # endif
 /*-----------------------------------------------*/
 
+typedef struct s_parse t_parse;
+
+
+// INFO: Game main struct
+/*-----------------------------------------------*/
+typedef struct s_cub3d {
+	t_parse	*parse;
+	mlx_t	*mlx;
+}	t_cub3d;
+/*-----------------------------------------------*/
+
 
 // INFO: parcing struct
 /*-----------------------------------------------*/
-typedef struct s_parse {
+struct s_parse {
 	char		*file_name;
 	char		**map;
 	mlx_image_t	*north_texture;
@@ -56,31 +68,21 @@ typedef struct s_parse {
 	mlx_image_t	*west_texture;
 	int			floor_color[3];
 	int			ceiling_color[3];
-}t_parse;
+	int			player;
+	char			player_direction;
+	int			pxp;
+	int			pyp;
+	int			rows;
+};
 /*-----------------------------------------------*/
 
 
-// INFO: Game main struct
-/*-----------------------------------------------*/
-typedef struct s_cub3d {
-	mlx_t	*mlx;
-	t_parse	parse;
-}	t_cub3d;
-/*-----------------------------------------------*/
+int	parse_map(t_cub3d *game, char **av);
+char	**get_map(t_cub3d *game, char **av);
+char	**copy_map(t_cub3d *game);
+void	free_map_copy(char **map_copy, int rows);
+void	find_player_position(t_cub3d *game);
+void	flood_fill(char **map, int x, int y);
 
-
-// INFO: parcing functions
-/*-----------------------------------------------*/
-void	parse_rgb(char **element, t_cub3d *game);
-void	parse_elements(int cub_file, t_cub3d *game);
-void	parse_file(char **av, t_cub3d *game);
-void	check_rgb_values(char **colors, char **element, t_cub3d *game);
-/*-----------------------------------------------*/
-
-// INFO: error handling
-/*-----------------------------------------------*/
-void	parse_error(int error_code, t_cub3d *game);
-void	destroy_parcing(t_cub3d *game);
-/*-----------------------------------------------*/
 
 #endif
