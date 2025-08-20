@@ -60,6 +60,7 @@ typedef struct s_cub3d {
 // INFO: parcing struct
 /*-----------------------------------------------*/
 struct s_parse {
+	int			cub_file;
 	char		*file_name;
 	char		**map;
 	mlx_image_t	*north_texture;
@@ -69,7 +70,7 @@ struct s_parse {
 	int			floor_color[3];
 	int			ceiling_color[3];
 	int			player;
-	char			player_direction;
+	char		player_direction;
 	int			pxp;
 	int			pyp;
 	int			rows;
@@ -77,12 +78,18 @@ struct s_parse {
 /*-----------------------------------------------*/
 
 
-int	parse_map(t_cub3d *game, char **av);
-char	**get_map(t_cub3d *game, char **av);
+void	parse_map(t_cub3d *game);
+char	**get_map(t_cub3d *game);
 char	**copy_map(t_cub3d *game);
 void	free_map_copy(char **map_copy, int rows);
 void	find_player_position(t_cub3d *game);
 void	flood_fill(char **map, int x, int y);
+void	destroy_parsing(t_cub3d *game);
+void	parse_error(int error_code, t_cub3d *game);
+void	check_rgb_values(char **colors, char **element, t_cub3d *game);
+void	parse_rgb(char **element, t_cub3d *game);
+void	parse_elements(t_cub3d *game);
+void	parse_file(char **av, t_cub3d *game);
 
 
 #endif

@@ -12,20 +12,6 @@
 
 #include "../cub3d.h"
 
-static int	check_file(char **av)
-{
-	int	len;
-
-	if (!av[1])
-		return (0);
-	len = ft_strlen(av[1]);
-	if (len < 4)
-		return (0);
-	if (ft_strncmp(av[1] + (len - 4), ".cub", 4) != 0)
-		return (0);
-	return (1);
-}
-
 static char	*read_map(int fd)
 {
 	char	*file;
@@ -47,28 +33,23 @@ static char	*read_map(int fd)
 		temp = file;
 		file = ft_strjoin(file, line);
 		free(temp);
+		temp = file;
+		file = ft_strjoin(file, "\n");
+		free(temp);
 		free(line);
 	}
 	return (file);
 }
 
-char	**get_map(t_cub3d *game, char **av)
+char	**get_map(t_cub3d *game)
 {
-	int		fd;
 	char	*file;
 	char	**map;
 
-	fd = open(av[1], O_RDWR);
-	if (fd < 0)
-	{
-		printf(RED"ERROR:\nCannot open file!"RESET);
-		exit(1);
-	}
-	file = read_map(fd);
+	file = read_map(game->parse->cub_file);
 	if (!file)
 		exit (1);
 	map = ft_split(file, '\n');
 	free(file);
-	close(fd);
 	return (map);
 }

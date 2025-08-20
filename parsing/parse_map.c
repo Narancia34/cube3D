@@ -41,28 +41,21 @@ int	check_map_components(t_cub3d *game)
 	return (1);
 }
 
-int	parse_map(t_cub3d *game, char **av)
+void	parse_map(t_cub3d *game)
 {
-	game->parse->map = get_map(game, av);
+	char	**map_copy;
+
+	game->parse->map = get_map(game);
 	if (check_map_components(game) == 0)
-		return (0);
-	char **map_copy = copy_map(game);
+		destroy_parsing(game);
+	map_copy = copy_map(game);
 	find_player_position(game);
 	map_copy[game->parse->pyp][game->parse->pxp] = '0';
 	flood_fill(map_copy, game->parse->pxp, game->parse->pyp);
-	int j = -1;
-	while (map_copy[++j])
-		printf("%s\n", map_copy[j]);
-	free_map_copy(map_copy, game->parse->rows);
-	j = 0;
-	if (game->parse->map)
-	{
-		while (game->parse->map[j])
-		{
-			free(game->parse->map[j]);
-			j++;
-		}
-		free(game->parse->map);
-	}
-	return 1;
+	// int j = -1;
+	// while (map_copy[++j])
+	// 	printf("%s\n", map_copy[j]);
+	// printf("m here\n");
+	free_arr(map_copy);
+	// free_map_copy(map_copy, game->parse->rows);
 }

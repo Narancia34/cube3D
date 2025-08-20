@@ -12,20 +12,20 @@
 
 #include "../cub3d.h"
 
-static char	**fetch_elemet(int cub_file)
+static char	**fetch_elemet(t_cub3d *game)
 {
 	char	*file_line;
 	char	**element;
 
 	file_line = NULL;
 	element = NULL;
-	file_line = get_next_line(cub_file);
+	file_line = get_next_line(game->parse->cub_file);
 	// WARN: file_line dosent contain "\n"
 	// wrong check!
 	while (!ft_strncmp(file_line, "\n", 0))
 	{
 		free(file_line);
-		file_line = get_next_line(cub_file);
+		file_line = get_next_line(game->parse->cub_file);
 	}
 	element = ft_split(file_line, ' ');
 	free(file_line);
@@ -60,13 +60,13 @@ static mlx_image_t	*init_texture(char **element, t_cub3d *game)
 static void	parse_texture(char **element, t_cub3d *game)
 {
 	if (!ft_strncmp(element[0], "NO", 0))
-		game->parse.north_texture = init_texture(element, game);
+		game->parse->north_texture = init_texture(element, game);
 	else if (!ft_strncmp(element[0], "SO", 0))
-		game->parse.south_texture = init_texture(element, game);
+		game->parse->south_texture = init_texture(element, game);
 	else if (!ft_strncmp(element[0], "WE", 0))
-		game->parse.west_texture = init_texture(element, game);
+		game->parse->west_texture = init_texture(element, game);
 	else if (!ft_strncmp(element[0], "EA", 0))
-		game->parse.east_texture = init_texture(element, game);
+		game->parse->east_texture = init_texture(element, game);
 	else if (!ft_strncmp(element[0], "F", 0)
 		|| !ft_strncmp(element[0], "C", 0))
 		parse_rgb(element, game);
@@ -74,7 +74,7 @@ static void	parse_texture(char **element, t_cub3d *game)
 		parse_error(4, game);
 }
 
-void	parse_elements(int cub_file, t_cub3d *game)
+void	parse_elements(t_cub3d *game)
 {
 	char	**element;
 	int		element_parsed;
@@ -84,10 +84,10 @@ void	parse_elements(int cub_file, t_cub3d *game)
 	while (element_parsed < 6)
 	{
 		free_arr(element);
-		element = fetch_elemet(cub_file);
+		element = fetch_elemet(game);
 		parse_texture(element, game);
 		element_parsed++;
 	}
 	free_arr(element);
-	get_next_line(-1);
+	// get_next_line(-1);
 }

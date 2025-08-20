@@ -12,16 +12,25 @@
 
 #include "../cub3d.h"
 
-void	parse_file(char **av, t_cub3d *game)
+static void	check_file(char **av, t_cub3d *game)
 {
-	int	cub_file;
+	int	len;
 
 	if (!av[1])
 		parse_error(6, game);
-	cub_file = open(av[1], O_RDONLY);
-	if (-1 == cub_file)
+	len = ft_strlen(av[1]);
+	if (len < 5 && ft_strncmp(av[1] + (len - 4), ".cub", 4))
+		parse_error(6, game);
+	game->parse->cub_file = open(av[1], O_RDONLY);
+	if (-1 == game->parse->cub_file)
 		parse_error(5, NULL);
-	parse_elements(cub_file, game);
-	close(cub_file);
+}
+
+void	parse_file(char **av, t_cub3d *game)
+{
+	check_file(av, game);
+	parse_elements(game);
+	parse_map(game);
+	close(game->parse->cub_file);
 	printf(GREEN"Parsing done correctlly\n"RESET);
 }
