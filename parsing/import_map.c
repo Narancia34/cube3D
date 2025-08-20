@@ -19,12 +19,13 @@ static char	*read_map(int fd)
 	char	*line;
 
 	file = ft_strdup("");
-	if (fd < 0)
-	{
-		free(file);
-		printf(RED"Error:\nInvalid file name!"RESET);
-		return (NULL);
-	}
+	// if (fd < 0)
+	// {
+	// 	free(file);
+	// 	printf(RED"Error:\nInvalid file name!"RESET);
+	// 	return (NULL);
+	// }
+
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -49,7 +50,12 @@ char	**get_map(t_cub3d *game)
 	file = read_map(game->parse->cub_file);
 	if (!file)
 		exit (1);
+	// printf("%s", file);
+	// printf("================================================\n");
 	map = ft_split(file, '\n');
+	// for (int i = 0; map[i]; i++)
+	// 	printf("%s\n", map[i]);
+	// printf("-----");
 	free(file);
 	return (map);
 }

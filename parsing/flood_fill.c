@@ -35,7 +35,7 @@ char	**copy_map(t_cub3d *game)
 	while (game->parse->map[rows])
 		rows++;
 	game->parse->rows = rows;
-	map_copy = malloc(rows * sizeof(char *));
+	map_copy = malloc((rows + 1) * sizeof(char *));
 	if (!map_copy)
 		exit(0);
 	i = 0;
@@ -50,6 +50,7 @@ char	**copy_map(t_cub3d *game)
 		}
 		i++;
 	}
+	map_copy[i] = NULL;
 	return (map_copy);
 }
 
