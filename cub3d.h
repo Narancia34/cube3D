@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "./libs/MLX42/include/MLX42/MLX42.h"
+# include "./libs/My_library/my_library.h"
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -51,8 +52,10 @@ typedef struct s_parse t_parse;
 /*-----------------------------------------------*/
 typedef struct s_cub3d {
 	t_parse	*parse;
+	mlx_t	*mlx;
 }	t_cub3d;
 /*-----------------------------------------------*/
+
 
 // INFO: parcing struct
 /*-----------------------------------------------*/

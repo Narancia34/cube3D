@@ -6,7 +6,7 @@
 /*   By: fbicane <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:26:17 by fbicane           #+#    #+#             */
-/*   Updated: 2025/02/10 20:55:05 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/08/13 12:26:40 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static char	*get_the_newline(char *container)
 	i = 0;
 	while (container[i] && container[i] != '\n')
 		i++;
-	if (container[i] == '\n')
-		i++;
+	// if (container[i] == '\n')
+	// 	i++;
 	new_line = malloc((i + 1) * sizeof(char));
 	if (!new_line)
 		return (free (container), NULL);
