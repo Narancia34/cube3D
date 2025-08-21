@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/12 17:40:19 by mgamraou         ###   ########.fr       */
+/*   Updated: 2025/08/21 15:23:31 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@
 /*-----------------------------------------------*/
 
 typedef struct s_parse t_parse;
+typedef struct s_mechanics t_mechanics;
 
 
 // INFO: Game main struct
 /*-----------------------------------------------*/
 typedef struct s_cub3d {
 	t_parse	*parse;
+	t_mechanics	*mechanics;
 	mlx_t	*mlx;
 }	t_cub3d;
 /*-----------------------------------------------*/
@@ -77,6 +79,11 @@ struct s_parse {
 };
 /*-----------------------------------------------*/
 
+struct s_mechanics {
+	mlx_image_t	*img1;
+	mlx_image_t	*img2;
+};
+
 
 void	parse_map(t_cub3d *game);
 char	**get_map(t_cub3d *game);
@@ -90,6 +97,8 @@ void	check_rgb_values(char **colors, char **element, t_cub3d *game);
 void	parse_rgb(char **element, t_cub3d *game);
 void	parse_elements(t_cub3d *game);
 void	parse_file(char **av, t_cub3d *game);
+void	render_2d_map(t_cub3d *game);
+int	load_textures(t_cub3d *game);
 
 
 #endif
