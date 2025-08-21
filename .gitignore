@@ -2,3 +2,4 @@ cub3D
 *.o
 *.a
 libs/MLX42/build
+.vscode
