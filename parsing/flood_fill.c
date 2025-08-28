@@ -70,6 +70,8 @@ void	find_player_position(t_cub3d *game)
 			{
 				game->parse->pxp = x;
 				game->parse->pyp = y;
+				game->pxp = x;
+				game->pyp = y;
 				return ;
 			}
 			x++;

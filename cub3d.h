@@ -52,9 +52,11 @@ typedef struct s_mechanics t_mechanics;
 // INFO: Game main struct
 /*-----------------------------------------------*/
 typedef struct s_cub3d {
-	t_parse	*parse;
+	mlx_t		*mlx;
+	t_parse		*parse;
 	t_mechanics	*mechanics;
-	mlx_t	*mlx;
+	double		pxp;
+	double		pyp;
 }	t_cub3d;
 /*-----------------------------------------------*/
 
