@@ -16,29 +16,13 @@
 static void	set_player_direction(t_cub3d *game)
 {
 	if ('N' == game->parse->player_direction)
-	{
 		game->player_angle = -M_PI/2.0;
-		game->mechanics->pxd = 0;
-		game->mechanics->pyd = -1;
-	}
 	else if ('S' == game->parse->player_direction)
-	{
 		game->player_angle = M_PI / 2.0;
-		game->mechanics->pxd = 0;
-		game->mechanics->pyd = 1;
-	}
 	else if ('W' == game->parse->player_direction)
-	{
 		game->player_angle = M_PI;
-		game->mechanics->pxd = -1;
-		game->mechanics->pyd = 0;
-	}
-	else if ('S' == game->parse->player_direction)
-	{
+	else if ('E' == game->parse->player_direction)
 		game->player_angle = 0.0;
-		game->mechanics->pxd = 1;
-		game->mechanics->pyd = 0;
-	}
 }
 
 void	player_rotation(t_cub3d *game)

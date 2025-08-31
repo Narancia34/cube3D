@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 #include <math.h> // Needed for cos(), sin(), abs(), and round()
+#include <stdint.h>
 
 // Forward declaration for your movement function, which should be in another file.
 void player_mouvement(t_cub3d *game);
@@ -59,6 +60,35 @@ void	update_game(void *param)
 		game->player_angle += ROTATION_SPEED * game->mlx->delta_time;
 	if (game->mechanics->look_left)
 		game->player_angle -= ROTATION_SPEED * game->mlx->delta_time;
+	double dir_x = cos(game->player_angle);
+	double dir_y = sin(game->player_angle);
+	double	new_x = game->pxp;
+	double	new_y = game->pyp;
+	if (game->mechanics->move_forward)
+	{
+		new_x += dir_x * 0.5 * game->mlx->delta_time;
+		new_y += dir_y * 0.5 * game->mlx->delta_time;
+	}
+	if (game->mechanics->move_backward)
+	{
+		new_x -= dir_x * 0.5 * game->mlx->delta_time;
+		new_y -= dir_y * 0.5 * game->mlx->delta_time;
+
+	}
+	if (game->mechanics->move_left)
+	{
+		new_x += dir_y * 0.5 * game->mlx->delta_time;
+		new_y += dir_x * 0.5 * game->mlx->delta_time;
+
+	}
+	if (game->mechanics->move_right)
+	{
+		new_x -= dir_y * 0.5 * game->mlx->delta_time;
+		new_y -= dir_x * 0.5 * game->mlx->delta_time;
+
+	}
+	game->pxp = new_x;
+	game->pyp = new_y;
 
 	// --- 2. HANDLE MOVEMENT & COLLISION ---
 	// player_mouvement(game); // This calls your existing movement function
@@ -76,8 +106,6 @@ void	update_game(void *param)
 	int line_length = 30;
 
 	// Use the angle to find the direction
-	double dir_x = cos(game->player_angle);
-	double dir_y = sin(game->player_angle);
 
 	int end_x = start_x + line_length * dir_x;
 	int end_y = start_y + line_length * dir_y;
@@ -87,4 +115,6 @@ void	update_game(void *param)
 	// you are using for your 2D map view.
 	if (game->scene_image) // Check if image exists
 		draw_line(game->scene_image, start_x, start_y, end_x, end_y, 0xFF0000FF);
+	game->mechanics->player->instances[0].y = (int32_t)(game->pyp * 20 + 8);
+	game->mechanics->player->instances[0].x = (int32_t)(game->pxp * 20 + 8);
 }
