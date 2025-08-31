@@ -26,8 +26,8 @@ RESET = \033[0m
 
 SRCS =	$(shell ls ./parsing/*.c) \
 		$(shell ls ./error_handling/*.c) \
-		./main.c \
-		$(shell ls ./game_mechanics/*.c)
+		$(shell find ./game_mechanics -name "*.c") \
+		./main.c ./update_game.c \
 
 OFILES = $(SRCS:.c=.o)
 

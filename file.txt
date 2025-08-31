@@ -1,0 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_movment.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/21 18:25:06 by fbicane           #+#    #+#             */
+/*   Updated: 2025/08/30 10:59:08 by fbicane          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../cub3d.h"
+
+
+static bool	is_valid_move(t_cub3d *game, t_move move, double move_speed)
+{
+	double	map_x;
+	double	map_y;
+
+	map_x = game->pxp;
+	map_y = game->pyp;
+
+
+	(void)move_speed;
+
+	if (FORWARD == move)
+		map_y = game->pyp - move_speed * game->mlx->delta_time;
+	else if (BACKWARD == move)
+		map_y = game->pyp + move_speed * game->mlx->delta_time;
+		// map_y += 1;
+	else if (LEFT == move)
+		map_x = game->pxp - move_speed * game->mlx->delta_time;
+	else if (RIGHT == move)
+		map_x = game->pxp + move_speed * game->mlx->delta_time;
+		// map_x += 1;
+	if ('1' != game->parse->map[(int)map_y][(int)map_x])
+		return (true);
+	return (false);
+}
+
+void	player_mouvement(t_cub3d *game)
+{
+	const double	move_speed = 4.0;
+
+	if (true == game->mechanics->move_forward)
+	{
+		if (is_valid_move(game,FORWARD, move_speed))
+			game->pyp -= move_speed * game->mlx->delta_time;
+	}
+	else if (true == game->mechanics->move_backward)
+	{
+		if (is_valid_move(game, BACKWARD, move_speed))
+			game->pyp += move_speed * game->mlx->delta_time;
+	}
+	else if (true == game->mechanics->move_left)
+	{
+		if (is_valid_move(game, LEFT, move_speed))
+			game->pxp -= move_speed * game->mlx->delta_time;
+	}
+	else if (true == game->mechanics->move_right)
+	{
+		if (is_valid_move(game, RIGHT, move_speed))
+			game->pxp += move_speed * game->mlx->delta_time;
+	}
+	game->mechanics->player->instances[0].y = (int32_t)(game->pyp * 20 + 8);
+	game->mechanics->player->instances[0].x = (int32_t)(game->pxp * 20 + 8);
+}

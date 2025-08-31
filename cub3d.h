@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/21 15:23:31 by mgamraou         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:37:35 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,19 @@
 typedef struct s_parse t_parse;
 typedef struct s_mechanics t_mechanics;
 
+# ifndef HEIGHT
+#  define HEIGHT 660
+# endif
+# ifndef WIDTH
+#  define WIDTH 660
+# endif
+
+typedef enum {
+	FORWARD,
+	BACKWARD,
+	LEFT,
+	RIGHT,
+} t_move;
 
 // INFO: Game main struct
 /*-----------------------------------------------*/
@@ -57,6 +70,8 @@ typedef struct s_cub3d {
 	t_mechanics	*mechanics;
 	double		pxp;
 	double		pyp;
+	double		player_angle;
+	mlx_image_t	*scene_image;
 }	t_cub3d;
 /*-----------------------------------------------*/
 
@@ -84,6 +99,19 @@ struct s_parse {
 struct s_mechanics {
 	mlx_image_t	*img1;
 	mlx_image_t	*img2;
+	mlx_image_t	*player;
+
+	// player rotation
+	int			pxd;
+	int			pyd;
+	bool		look_left;
+	bool		look_right;
+
+	// player mouvment
+	bool		move_forward;
+	bool		move_backward;
+	bool		move_right;
+	bool		move_left;
 };
 
 
@@ -99,8 +127,10 @@ void	check_rgb_values(char **colors, char **element, t_cub3d *game);
 void	parse_rgb(char **element, t_cub3d *game);
 void	parse_elements(t_cub3d *game);
 void	parse_file(char **av, t_cub3d *game);
-void	render_2d_map(t_cub3d *game);
-int	load_textures(t_cub3d *game);
+void	render_2d_map(void *param);
+int		load_textures(t_cub3d *game);
+void	key_handler(mlx_key_data_t key, void *param);
+void	update_game(void *param);
 
 
 #endif
