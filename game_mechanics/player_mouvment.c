@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../cub3d.h"
 
 static void	player_new_position(double *new_x, double *new_y, t_cub3d *game)
 {
