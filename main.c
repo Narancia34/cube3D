@@ -6,13 +6,12 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:45:33 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/31 10:16:31 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/01 10:13:40 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	player_rotation(t_cub3d *game);
 void	set_game_parse(t_cub3d *game)
 {
 	game->parse->file_name = NULL;
@@ -40,7 +39,6 @@ int main(int ac, char **av)
 	parse_file(av, &game);
 	if (load_textures(&game) != 0)
 		destroy_parsing(&game);
-	player_rotation(&game);
 	render_2d_map(&game);
 	game.scene_image = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(game.mlx, game.scene_image, 0, 0);

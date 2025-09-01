@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 14:38:32 by mgamraou          #+#    #+#             */
-/*   Updated: 2025/08/21 20:35:09 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/01 09:50:07 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	load_textures(t_cub3d *game)
 	game->mechanics->player = mlx_texture_to_image(game->mlx, player);
 	if (NULL == game->mechanics->img1 || NULL == game->mechanics->img2 || NULL == game->mechanics->player)
 		return(printf("error transforming textures ti images\n"), 1);
-	mlx_resize_image(game->mechanics->img1, 20, 20);
-	mlx_resize_image(game->mechanics->img2, 20, 20);
+	mlx_resize_image(game->mechanics->img1, 19, 19);
+	mlx_resize_image(game->mechanics->img2, 19, 19);
 	mlx_resize_image(game->mechanics->player, 4, 4);
 	return (0);
 }
