@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgamraou <mgamraou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 14:38:32 by mgamraou          #+#    #+#             */
-/*   Updated: 2025/08/21 15:24:15 by mgamraou         ###   ########.fr       */
+/*   Updated: 2025/09/01 09:50:07 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,18 @@ int	load_textures(t_cub3d *game)
 
 	mlx_texture_t* texture1 = mlx_load_png("./textures/Black.png");
 	mlx_texture_t* texture2 = mlx_load_png("./textures/white.png");
-	if (!texture1 || !texture2)
-		return(printf("error11\n"), 1);
+	mlx_texture_t	*player = mlx_load_png("./textures/player_2.png");
+
+
+	if (!texture1 || !texture2 || !player)
+		return(printf("error loading textures\n"), 1);
 	game->mechanics->img1 = mlx_texture_to_image(game->mlx, texture1);
 	game->mechanics->img2 = mlx_texture_to_image(game->mlx, texture2);
-	if (!game->mechanics->img1 || !game->mechanics->img2)
-		return(printf("error22\n"), 1);
-	mlx_resize_image(game->mechanics->img1, 20, 20);
-	mlx_resize_image(game->mechanics->img2, 20, 20);
+	game->mechanics->player = mlx_texture_to_image(game->mlx, player);
+	if (NULL == game->mechanics->img1 || NULL == game->mechanics->img2 || NULL == game->mechanics->player)
+		return(printf("error transforming textures ti images\n"), 1);
+	mlx_resize_image(game->mechanics->img1, 19, 19);
+	mlx_resize_image(game->mechanics->img2, 19, 19);
+	mlx_resize_image(game->mechanics->player, 4, 4);
 	return (0);
 }
