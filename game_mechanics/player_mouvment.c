@@ -46,11 +46,8 @@ void	player_mouvement(t_cub3d *game)
 	double	new_y = game->pyp;
 
 	player_new_position(&new_x, &new_y, game);
-	if ('1' != game->parse->map[(int)new_y][(int)new_x])
-	{
-		game->pxp = new_x;
-		game->pyp = new_y;
-	}
+	game->pyp = new_y;
+	game->pxp = new_x;
 	game->mechanics->player->instances[0].y = (int32_t)(game->pyp * 20 + 8);
 	game->mechanics->player->instances[0].x = (int32_t)(game->pxp * 20 + 8);
 }
