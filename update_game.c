@@ -32,13 +32,12 @@ void draw_filled_square(mlx_image_t* image, int start_x, int start_y, int size, 
 
 void draw_map_scene(t_cub3d *game)
 {
-	const int tile_size = 20;
+	const int tile_size = 5;
 	const uint32_t floor_color = 0xFFFFFFFF;
 	const uint32_t wall_color = 0x000000FF;
 	int i = 0;
 	int j;
 
-	draw_filled_square(game->scene_image, 0, 0, HEIGHT, floor_color);
 	while (game->parse->map[i])
 	{
 		j = 0;
@@ -48,6 +47,8 @@ void draw_map_scene(t_cub3d *game)
 			{
 				draw_filled_square(game->scene_image, j * tile_size, i * tile_size, tile_size, wall_color);
 			}
+			else
+				draw_filled_square(game->scene_image, j * tile_size, i * tile_size, tile_size, floor_color);
 			j++;
 		}
 		i++;
@@ -88,11 +89,11 @@ void draw_line(mlx_image_t *image, int x1, int y1, int x2, int y2, uint32_t colo
 
 void draw_player_pov(t_cub3d *game)
 {
-    const int line_length = 30;
+    const int line_length = 3;
     const uint32_t line_color = 0xFF0000FF; // Red
 
-    int start_x = (int)(game->pxp * 20 + 8);
-    int start_y = (int)(game->pyp * 20 + 8);
+    int start_x = (int)(game->pxp * 5+2);
+    int start_y = (int)(game->pyp * 5+2);
 
     double dir_x = cos(game->player_angle);
     double dir_y = sin(game->player_angle);
@@ -113,6 +114,7 @@ void	update_game(void *param)
 	player_mouvement(game);
 
 	// draw pov line
+	cast_rays(game);
 	draw_map_scene(game);
 	draw_player_pov(game);
 }
