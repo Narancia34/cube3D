@@ -48,6 +48,6 @@ void	player_mouvement(t_cub3d *game)
 	player_new_position(&new_x, &new_y, game);
 	game->pyp = new_y;
 	game->pxp = new_x;
-	game->mechanics->player->instances[0].y = (int32_t)(game->pyp * 20 + 8);
-	game->mechanics->player->instances[0].x = (int32_t)(game->pxp * 20 + 8);
+	game->mechanics->player->instances[0].y = (int32_t)(game->pyp * 5 + 2);
+	game->mechanics->player->instances[0].x = (int32_t)(game->pxp * 5 + 2);
 }
