@@ -28,14 +28,14 @@ static void	player_new_position(double *new_x, double *new_y, t_cub3d *game)
 		(*new_x) -= dir_x * mouvment_speed * game->mlx->delta_time;
 		(*new_y) -= dir_y * mouvment_speed * game->mlx->delta_time;
 	}
-	if (game->mechanics->move_left)
-	{
-		(*new_x) += dir_y * mouvment_speed * game->mlx->delta_time;
-		(*new_y) += dir_x * mouvment_speed * game->mlx->delta_time;
-	}
 	if (game->mechanics->move_right)
 	{
 		(*new_x) -= dir_y * mouvment_speed * game->mlx->delta_time;
+		(*new_y) += dir_x * mouvment_speed * game->mlx->delta_time;
+	}
+	if (game->mechanics->move_left)
+	{
+		(*new_x) += dir_y * mouvment_speed * game->mlx->delta_time;
 		(*new_y) -= dir_x * mouvment_speed * game->mlx->delta_time;
 	}
 }
