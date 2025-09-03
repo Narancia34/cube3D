@@ -114,7 +114,14 @@ void draw_wall_line(t_cub3d *game, int x)
 			else if (y >= game->ray.wall_start && y < game->ray.wall_end)
 			{
 				uint32_t wall_color;
-                wall_color = 0x00FF00FF;
+                if (game->ray.side == 1 && game->ray.step_y == -1)
+                    wall_color = 0x00FF00FF;
+                else if (game->ray.side == 1 && game->ray.step_y == 1)
+                    wall_color = 0x175e07FF;
+                else if (game->ray.side == 0 && game->ray.step_x == -1)
+                    wall_color = 0x9c098dFF;
+                else
+                    wall_color = 0x3e0970FF;
 				mlx_put_pixel(game->scene_image, x, y, wall_color);
 			}
 			else
