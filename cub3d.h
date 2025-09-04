@@ -55,12 +55,35 @@ typedef struct s_mechanics t_mechanics;
 #  define WIDTH 660
 # endif
 
+# ifndef FOV
+#  define FOV 1.0472 // 60 degrees in radians
+# endif
+
 typedef enum {
 	FORWARD,
 	BACKWARD,
 	LEFT,
 	RIGHT,
 } t_move;
+
+typedef struct s_ray{
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		wall_height;
+	int		wall_start;
+	int		wall_end;
+} t_ray;
 
 // INFO: Game main struct
 /*-----------------------------------------------*/
@@ -72,6 +95,7 @@ typedef struct s_cub3d {
 	double		pyp;
 	double		player_angle;
 	mlx_image_t	*scene_image;
+	t_ray		ray;
 }	t_cub3d;
 /*-----------------------------------------------*/
 
@@ -133,6 +157,6 @@ void	key_handler(mlx_key_data_t key, void *param);
 void	update_game(void *param);
 void	player_mouvement(t_cub3d *game);
 void	player_rotation(t_cub3d *game);
-
+void    cast_rays(t_cub3d *game);
 
 #endif

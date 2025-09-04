@@ -33,14 +33,14 @@ void	render_2d_map(void *param)
 		j = 0;
 		while (game->parse->map[i][j])
 		{
-			put_img(game, j * 20, i * 20, game->parse->map[i][j]);
+			put_img(game, j * 5, i * 5, game->parse->map[i][j]);
 			j++;
 		}
 		i++;
 	}
 	// render player
 	mlx_image_to_window(game->mlx, game->mechanics->player,
-			game->pxp * 20 + 8, game->pyp * 20 + 8);
+			game->pxp * 5 + 2, game->pyp * 5 + 2);
 	// game->tmp = 8;
 }
 

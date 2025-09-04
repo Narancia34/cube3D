@@ -27,8 +27,8 @@ int	load_textures(t_cub3d *game)
 	game->mechanics->player = mlx_texture_to_image(game->mlx, player);
 	if (NULL == game->mechanics->img1 || NULL == game->mechanics->img2 || NULL == game->mechanics->player)
 		return(printf("error transforming textures ti images\n"), 1);
-	mlx_resize_image(game->mechanics->img1, 19, 19);
-	mlx_resize_image(game->mechanics->img2, 19, 19);
-	mlx_resize_image(game->mechanics->player, 4, 4);
+	mlx_resize_image(game->mechanics->img1, 4, 4);
+	mlx_resize_image(game->mechanics->img2, 4, 4);
+	mlx_resize_image(game->mechanics->player, 2, 2);
 	return (0);
 }

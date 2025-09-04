@@ -28,14 +28,14 @@ static void	player_new_position(double *new_x, double *new_y, t_cub3d *game)
 		(*new_x) -= dir_x * mouvment_speed * game->mlx->delta_time;
 		(*new_y) -= dir_y * mouvment_speed * game->mlx->delta_time;
 	}
-	if (game->mechanics->move_left)
-	{
-		(*new_x) += dir_y * mouvment_speed * game->mlx->delta_time;
-		(*new_y) += dir_x * mouvment_speed * game->mlx->delta_time;
-	}
 	if (game->mechanics->move_right)
 	{
 		(*new_x) -= dir_y * mouvment_speed * game->mlx->delta_time;
+		(*new_y) += dir_x * mouvment_speed * game->mlx->delta_time;
+	}
+	if (game->mechanics->move_left)
+	{
+		(*new_x) += dir_y * mouvment_speed * game->mlx->delta_time;
 		(*new_y) -= dir_x * mouvment_speed * game->mlx->delta_time;
 	}
 }
@@ -48,6 +48,6 @@ void	player_mouvement(t_cub3d *game)
 	player_new_position(&new_x, &new_y, game);
 	game->pyp = new_y;
 	game->pxp = new_x;
-	game->mechanics->player->instances[0].y = (int32_t)(game->pyp * 20 + 8);
-	game->mechanics->player->instances[0].x = (int32_t)(game->pxp * 20 + 8);
+	game->mechanics->player->instances[0].y = (int32_t)(game->pyp * 5 + 2);
+	game->mechanics->player->instances[0].x = (int32_t)(game->pxp * 5 + 2);
 }
