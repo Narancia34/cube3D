@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 09:40:13 by mgamraou          #+#    #+#             */
-/*   Updated: 2025/09/05 00:16:47 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/05 00:33:59 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,32 +35,7 @@ static char	*read_map(int fd)
 	return (file);
 }
 
-{
-	int	i;
-	int	j;
-	char	c;
 
-	i = -1;
-	while (game->parse->map[++i])
-	{
-		j = -1;
-		while (game->parse->map[i][++j])
-		{
-			c = game->parse->map[i][j];
-			if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
-			{
-				game->parse->player_direction = c;
-				game->parse->player++;
-			}
-			else if (c != '1' && c != '0' && c != 32)
-				return (printf(RED"Error:\nExtra map component"RESET), 0);
-		}
-	}
-	if (game->parse->player > 1)
-		return (printf(RED"Error:\nMore than one starting position"RESET), 0);
-	else if (game->parse->player == 0)
-		return (printf(RED"Error:\nNo starting position"RESET), 0);
-	return (1);
 void	get_map(t_cub3d *game)
 {
 	char	*file;
@@ -81,5 +56,6 @@ void	parse_map(t_cub3d *game)
 	get_map(game);
 	map = copy_map(game);
 	check_map_components(game, map);
+	complete_missing_cells(map);
 	find_player_position(game);
 }

@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/12 17:40:19 by mgamraou         ###   ########.fr       */
+/*   Updated: 2025/09/05 00:34:02 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	parse_rgb(char **element, t_cub3d *game);
 void	parse_elements(t_cub3d *game);
 void	parse_file(char **av, t_cub3d *game);
 void	check_map_components(t_cub3d *game, char **map);
+void	complete_missing_cells(char **map);
 
 
 #endif
