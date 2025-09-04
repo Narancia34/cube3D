@@ -61,6 +61,17 @@ static char	*read_map(int fd)
 	else if (game->parse->player == 0)
 		return (printf(RED"Error:\nNo starting position"RESET), 0);
 	return (1);
+void	get_map(t_cub3d *game)
+{
+	char	*file;
+	char	**map;
+
+	file = read_map(game->parse->cub_file);
+	if (!file)
+		exit (1);
+	map = ft_split(file, '\n');
+	game->parse->map = map;
+	free(file);
 }
 
 void	parse_map(t_cub3d *game)
