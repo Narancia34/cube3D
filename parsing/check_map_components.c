@@ -12,53 +12,73 @@
 
 #include "../cub3d.h"
 
-static char	*read_map(int fd)
+static int	max_line_length(char **map)
 {
-	char	*file;
-	char	*temp;
-	char	*line;
+	int	result;
+	int	i;
+	int	temp;
 
-	file = ft_strdup("");
-	// if (fd < 0)
-	// {
-	// 	free(file);
-	// 	printf(RED"Error:\nInvalid file name!"RESET);
-	// 	return (NULL);
-	// }
-
-	while (1)
+	i = 0;
+	result = ft_strlen(map[0]);
+	while (map[++i])
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		temp = file;
-		file = ft_strjoin(file, line);
-		free(temp);
-		temp = file;
-		file = ft_strjoin(file, "\n");
-		free(temp);
-		free(line);
+		temp = ft_strlen(map[i]);
+		if (temp > result)
+			result = temp;
 	}
-	return (file);
+	return (result);
 }
 
-char	**get_map(t_cub3d *game)
+static char	*fixe_line(char *curent_map_line, int line_length)
 {
-	char	*file;
-	char	**map;
+	char	*result;
+	int		i;
 
-	file = read_map(game->parse->cub_file);
-	if (!file)
-		exit (1);
-	// printf("%s", file);
-	// printf("================================================\n");
-	map = ft_split(file, '\n');
-	// for (int i = 0; map[i]; i++)
-	// 	printf("%s\n", map[i]);
-	// printf("-----");
-	free(file);
-	return (map);
+	result = malloc(line_length + 1);
+	if (!result)
+		exit(1);
+	ft_strlcpy(result, curent_map_line, line_length + 1);
+	i = ft_strlen(result);
+	while (i < line_length)
+	{
+		result[i] = '?';
+		i++;
+	}
+	result[i] = '\0';
+	return (result);
 }
+
+static void	replace_space(char **map, int line)
+{
+	int	i;
+
+	i = -1;
+	while (map[line][++i])
+	{
+		if (' ' == map[line][i])
+			map[line][i] = '1';
+	}
+}
+
+void	fix_missing_cells(char **map)
+{
+	int		line_length;
+	int		line;
+	char	*line_to_free;
+
+	line_length = max_line_length(map);
+	line = -1;
+	while (map[++line])
+	{
+		replace_space(map, line);
+		if (!(line_length > (int)ft_strlen(map[line])))
+			continue ;
+		line_to_free = map[line];
+		map[line] = fixe_line(map[line], line_length);
+		free(line_to_free);
+	}
+}
+
 void	check_map_components(t_cub3d *game, char **map)
 {
 	int	i;
