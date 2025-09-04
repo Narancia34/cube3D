@@ -76,7 +76,10 @@ void	get_map(t_cub3d *game)
 
 void	parse_map(t_cub3d *game)
 {
+	char	**map;
 
 	get_map(game);
+	map = copy_map(game);
+	check_map_components(game, map);
 	find_player_position(game);
 }

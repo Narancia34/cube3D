@@ -6,7 +6,7 @@
 /*   By: mgamraou <mgamraou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 14:07:39 by mgamraou          #+#    #+#             */
-/*   Updated: 2025/08/11 14:26:26 by mgamraou         ###   ########.fr       */
+/*   Updated: 2025/09/04 23:20:54 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,3 +59,31 @@ char	**get_map(t_cub3d *game)
 	free(file);
 	return (map);
 }
+void	check_map_components(t_cub3d *game, char **map)
+{
+	int	i;
+	int	j;
+	char	c;
+
+	i = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+		{
+			c = map[i][j];
+			if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
+			{
+				game->parse->player_direction = c;
+				game->parse->player++;
+			}
+			else if (c != '1' && c != '0' && c != 32)
+				return (free_arr(map), parse_error(7, game));
+		}
+	}
+	if (game->parse->player > 1)
+		return (free_arr(map), parse_error(8, game));
+	else if (game->parse->player == 0)
+		return (free_arr(map), parse_error(9, game));
+}
+

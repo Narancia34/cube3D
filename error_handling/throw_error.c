@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 21:00:43 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/12 19:37:57 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/04 22:29:19 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,11 @@ void	parse_error(int error_code, t_cub3d *game)
 		printf(RED"Error:\nFile doesn't exist.\n"RESET);
 	else if (6 == error_code)
 		printf(RED"Error:\nMissing a .cub file.\n"RESET);
+	else if (7 == error_code)
+		printf(RED"Error:\nMore than one starting position.\n"RESET);
+	else if (8 == error_code)
+		printf(RED"Error:\nMore than one starting position.\n"RESET);
+	else if (9 == error_code)
+		printf(RED"Error:\nNo starting position.\n"RESET);
 	destroy_parsing(game);
 }
