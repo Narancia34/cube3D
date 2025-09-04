@@ -3,16 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgamraou <mgamraou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 09:40:13 by mgamraou          #+#    #+#             */
-/*   Updated: 2025/08/12 17:40:47 by mgamraou         ###   ########.fr       */
+/*   Updated: 2025/09/05 00:16:47 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	check_map_components(t_cub3d *game)
+static char	*read_map(int fd)
+{
+	char	*file;
+	char	*temp;
+	char	*line;
+
+	file = ft_strdup("");
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		temp = file;
+		file = ft_strjoin(file, line);
+		free(temp);
+		temp = file;
+		file = ft_strjoin(file, "\n");
+		free(temp);
+		free(line);
+	}
+	return (file);
+}
+
 {
 	int	i;
 	int	j;
@@ -43,19 +65,7 @@ int	check_map_components(t_cub3d *game)
 
 void	parse_map(t_cub3d *game)
 {
-	char	**map_copy;
 
-	game->parse->map = get_map(game);
-	if (check_map_components(game) == 0)
-		destroy_parsing(game);
-	map_copy = copy_map(game);
+	get_map(game);
 	find_player_position(game);
-	map_copy[game->parse->pyp][game->parse->pxp] = '0';
-	flood_fill(map_copy, game->parse->pxp, game->parse->pyp);
-	// int j = -1;
-	// while (map_copy[++j])
-	// 	printf("%s\n", map_copy[j]);
-	// printf("m here\n");
-	free_arr(map_copy);
-	// free_map_copy(map_copy, game->parse->rows);
 }
