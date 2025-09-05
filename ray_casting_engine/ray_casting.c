@@ -179,10 +179,10 @@ void    cast_rays(t_cub3d *game)
     {
         ray_angle = game->player_angle - (FOV / 2) + ((double)x / WIDTH) * FOV;
         cast_single_ray(game, ray_angle);
+        texture_mapping(game, x);
         game->ray.perp_wall_dist *= cos(ray_angle - game->player_angle);
         calculate_wall_height(game);
         draw_wall_line(game, x);
-	texture_mapping(game, x);
         x++;
     }
 }
