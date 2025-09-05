@@ -12,18 +12,55 @@
 
 #include "../cub3d.h"
 
-static char	*read_map(int fd)
+static char	*skip_newlines(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (!line[0])
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (line);
+}
+
+static char	*check_rest_of_file(t_cub3d *game, char *file)
+{
+	char	*line;
+
+	line = get_next_line(game->parse->cub_file);
+	while (line)
+	{
+		if (line[0])
+		{
+			free(line);
+			free(file);
+			parse_error(11, game);
+		}
+		free(line);
+		line = get_next_line(game->parse->cub_file);
+	}
+	return (file);
+}
+
+static char	*read_map(t_cub3d *game)
 {
 	char	*file;
 	char	*temp;
 	char	*line;
 
-	file = ft_strdup("");
+	file = skip_newlines(game->parse->cub_file);
+	temp = file;
+	file = ft_strjoin(file, "\n");
+	free(temp);
 	while (1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(game->parse->cub_file);
 		if (!line)
 			break ;
+		if (!line[0])
+			return (free(line), check_rest_of_file(game ,file));
 		temp = file;
 		file = ft_strjoin(file, line);
 		free(temp);
@@ -35,13 +72,12 @@ static char	*read_map(int fd)
 	return (file);
 }
 
-
 void	get_map(t_cub3d *game)
 {
 	char	*file;
 	char	**map;
 
-	file = read_map(game->parse->cub_file);
+	file = read_map(game);
 	if (!file)
 		exit (1);
 	map = ft_split(file, '\n');

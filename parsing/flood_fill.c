@@ -6,7 +6,7 @@
 /*   By: mgamraou <mgamraou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 17:14:15 by mgamraou          #+#    #+#             */
-/*   Updated: 2025/09/05 00:28:46 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/05 14:29:52 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ char	**copy_map(t_cub3d *game)
 		map_copy[i] = ft_strdup(game->parse->map[i]);
 		if (!map_copy[i])
 		{
-			free_map_copy(map_copy, i);
+			// free_map_copy(map_copy, i);
+			free_arr(map_copy);
 			printf("error\n");
 			exit(0);
 		}

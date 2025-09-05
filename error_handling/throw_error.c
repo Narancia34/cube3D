@@ -12,6 +12,12 @@
 
 #include "../cub3d.h"
 
+static void	parse_error_extra(int error_code)
+{
+	else if (11 == error_code)
+		printf(RED"Error:\nMap content cannot be seperated by new lines.\n"RESET);
+}
+
 void	parse_error(int error_code, t_cub3d *game)
 {
 	if (1 == error_code)
@@ -35,5 +41,7 @@ void	parse_error(int error_code, t_cub3d *game)
 		printf(RED"Error:\nMore than one starting position.\n"RESET);
 	else if (9 == error_code)
 		printf(RED"Error:\nNo starting position.\n"RESET);
+	else
+		parse_error_extra(error_code);
 	destroy_parsing(game);
 }
