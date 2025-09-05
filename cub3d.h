@@ -92,6 +92,7 @@ void	parse_elements(t_cub3d *game);
 void	parse_file(char **av, t_cub3d *game);
 void	check_map_components(t_cub3d *game, char **map);
 void	complete_missing_cells(char **map);
+void	check_closed_map(char **map, t_cub3d *game);
 
 
 #endif

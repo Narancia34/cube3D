@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 09:40:13 by mgamraou          #+#    #+#             */
-/*   Updated: 2025/09/05 00:33:59 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/05 15:53:14 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,7 @@ void	parse_map(t_cub3d *game)
 	map = copy_map(game);
 	check_map_components(game, map);
 	complete_missing_cells(map);
+	check_closed_map(map, game);
 	find_player_position(game);
+	free_arr(map);
 }

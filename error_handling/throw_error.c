@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 21:00:43 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/04 22:29:19 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/05 15:28:15 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	parse_error_extra(int error_code)
 {
+	if (10 == error_code)
+		printf(RED"Error:\nMap is not closed.\n"RESET);
 	else if (11 == error_code)
 		printf(RED"Error:\nMap content cannot be seperated by new lines.\n"RESET);
 }
