@@ -138,6 +138,7 @@ void	texture_mapping(t_cub3d *game, int x)
 	double	text_pos;
 	int	tex_x;
 	int	tex_y;
+    mlx_image_t *texture;
 
 	if (game->ray.side == 0)
 		wallx = game->pyp + game->ray.perp_wall_dist * game->ray.ray_dir_y;
@@ -155,7 +156,15 @@ void	texture_mapping(t_cub3d *game, int x)
 	{
 		tex_y = (int)text_pos & (63);
 		text_pos += step;
-		uint32_t color = get_pixel(game->img3,tex_x, tex_y);
+        if (game->ray.side == 1 && game->ray.step_y == -1)
+            texture = game->img3;
+        else if (game->ray.side == 1 && game->ray.step_y == 1)
+            texture = game->img4;
+        else if (game->ray.side == 0 && game->ray.step_x == -1)
+            texture = game->img5;
+        else if (game->ray.side == 0 && game->ray.step_x == 1)
+            texture = game->img6;
+		uint32_t color = get_pixel(texture, tex_x, tex_y);
 		put_pixel(game->scene_image, x, y, color);
 	}
 }

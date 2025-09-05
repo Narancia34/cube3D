@@ -97,6 +97,9 @@ typedef struct s_cub3d {
 	mlx_image_t	*scene_image;
 	t_ray		ray;
 	mlx_image_t	*img3;
+	mlx_image_t	*img4;
+	mlx_image_t	*img5;
+	mlx_image_t	*img6;
 }	t_cub3d;
 /*-----------------------------------------------*/
 
