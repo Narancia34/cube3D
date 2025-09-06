@@ -38,7 +38,7 @@ void	parse_error(int error_code, t_cub3d *game)
 	else if (6 == error_code)
 		printf(RED"Error:\nMissing a .cub file.\n"RESET);
 	else if (7 == error_code)
-		printf(RED"Error:\nMore than one starting position.\n"RESET);
+		printf(RED"Error:\nUnexpected map element.\n"RESET);
 	else if (8 == error_code)
 		printf(RED"Error:\nMore than one starting position.\n"RESET);
 	else if (9 == error_code)
