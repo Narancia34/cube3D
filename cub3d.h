@@ -79,7 +79,6 @@ struct s_parse {
 
 
 void	parse_map(t_cub3d *game);
-void	get_map(t_cub3d *game);
 char	**copy_map(t_cub3d *game);
 void	free_map_copy(char **map_copy, int rows);
 void	find_player_position(t_cub3d *game);
@@ -93,6 +92,7 @@ void	parse_file(char **av, t_cub3d *game);
 void	check_map_components(t_cub3d *game, char **map);
 void	complete_missing_cells(char **map);
 void	check_closed_map(char **map, t_cub3d *game);
+void	replace_spaces(char **map);
 
 
 #endif

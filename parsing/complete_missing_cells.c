@@ -29,18 +29,6 @@ static int	max_line_length(char **map)
 	return (result);
 }
 
-static void	replace_space(char **map, int line)
-{
-	int	i;
-
-	i = -1;
-	while (map[line][++i])
-	{
-		if (' ' == map[line][i])
-			map[line][i] = '1';
-	}
-}
-
 static char	*fixe_line(char *curent_map_line, int line_length)
 {
 	char	*result;
@@ -60,6 +48,23 @@ static char	*fixe_line(char *curent_map_line, int line_length)
 	return (result);
 }
 
+void	replace_spaces(char **map)
+{
+	int	i;
+	int	line;
+
+	line = -1;
+	while (map[++line])
+	{
+		i = -1;
+		while (map[line][++i])
+		{
+			if (' ' == map[line][i])
+				map[line][i] = '1';
+		}
+	}
+}
+
 void	complete_missing_cells(char **map)
 {
 	int		line_length;
@@ -70,7 +75,6 @@ void	complete_missing_cells(char **map)
 	line = -1;
 	while (map[++line])
 	{
-		replace_space(map, line);
 		if (!(line_length > (int)ft_strlen(map[line])))
 			continue ;
 		line_to_free = map[line];

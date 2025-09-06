@@ -72,7 +72,7 @@ static char	*read_map(t_cub3d *game)
 	return (file);
 }
 
-void	get_map(t_cub3d *game)
+static void	get_map(t_cub3d *game)
 {
 	char	*file;
 	char	**map;
@@ -81,6 +81,7 @@ void	get_map(t_cub3d *game)
 	if (!file)
 		exit (1);
 	map = ft_split(file, '\n');
+	replace_spaces(map);
 	game->parse->map = map;
 	free(file);
 }
