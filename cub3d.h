@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/01 10:02:44 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/08 15:30:18 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ struct s_mechanics {
 	bool		move_backward;
 	bool		move_right;
 	bool		move_left;
+	bool		shift_pressed;
 };
 
 
@@ -158,5 +159,6 @@ void	update_game(void *param);
 void	player_mouvement(t_cub3d *game);
 void	player_rotation(t_cub3d *game);
 void    cast_rays(t_cub3d *game);
+void	cursor_handler(double xpos, double ypos, void *param);
 
 #endif

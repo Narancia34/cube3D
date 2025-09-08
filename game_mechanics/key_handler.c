@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 21:11:25 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/01 10:37:10 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/08 15:48:42 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 static void	player_rotation_key(t_cub3d *game, mlx_key_data_t *key)
 {
 
+	if (MLX_KEY_LEFT_SHIFT == key->key)
+	{
+		if (MLX_PRESS == key->action)
+			game->mechanics->shift_pressed = true;
+		else if(MLX_RELEASE == key->action)
+			game->mechanics->shift_pressed = false;
+	}
 	if (MLX_KEY_LEFT == key->key)
 	{
 		if (MLX_PRESS == key->action)
@@ -74,6 +81,10 @@ void	key_handler(mlx_key_data_t key, void *param)
 
 	player_rotation_key(game, &key);
 	player_mouvement_key(game, &key);
+	if (game->mechanics->shift_pressed)
+		mlx_set_cursor_mode(game->mlx, MLX_MOUSE_NORMAL);
+	else
+		mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
 	if (MLX_KEY_ESCAPE == key.key && MLX_PRESS == key.action)
 	{
 		// TODO: close and terminate

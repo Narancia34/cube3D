@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:45:33 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/01 10:13:40 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/08 16:05:09 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	set_game_parse(t_cub3d *game)
 	game->parse->west_texture = NULL;
 
 	game->mechanics->move_forward = false;
+	game->mechanics->shift_pressed = false;
 
 }
 
@@ -43,6 +44,9 @@ int main(int ac, char **av)
 	game.scene_image = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(game.mlx, game.scene_image, 0, 0);
 	mlx_key_hook(game.mlx, key_handler, &game);
+	mlx_set_cursor_mode(game.mlx, MLX_MOUSE_DISABLED);
+	mlx_cursor_hook(game.mlx, cursor_handler, &game);
+	// TODO: mlx_close_hook(); to close cleanly
 	mlx_loop_hook(game.mlx, update_game, &game);
 	mlx_loop(game.mlx);
 	destroy_parsing(&game);
