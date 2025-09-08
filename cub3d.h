@@ -136,7 +136,7 @@ struct s_mechanics {
 	bool		move_backward;
 	bool		move_right;
 	bool		move_left;
-	bool		shift_pressed;
+	bool		ctrl_pressed;
 };
 
 

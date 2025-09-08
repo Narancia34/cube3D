@@ -22,7 +22,7 @@ void	set_game_parse(t_cub3d *game)
 	game->parse->west_texture = NULL;
 
 	game->mechanics->move_forward = false;
-	game->mechanics->shift_pressed = false;
+	game->mechanics->ctrl_pressed = false;
 
 }
 
