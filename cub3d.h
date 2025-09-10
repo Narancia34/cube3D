@@ -164,5 +164,6 @@ void	player_mouvement(t_cub3d *game);
 void	player_rotation(t_cub3d *game);
 void    cast_rays(t_cub3d *game);
 void	cursor_handler(double xpos, double ypos, void *param);
+void	interact_with_doors(t_cub3d *game);
 
 #endif

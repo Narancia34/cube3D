@@ -85,6 +85,11 @@ void	key_handler(mlx_key_data_t key, void *param)
 		mlx_set_cursor_mode(game->mlx, MLX_MOUSE_NORMAL);
 	else
 		mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
+	if (MLX_KEY_SPACE == key.key)
+	{
+		if (MLX_PRESS == key.action)
+			interact_with_doors(game);
+	}
 	if (MLX_KEY_ESCAPE == key.key && MLX_PRESS == key.action)
 	{
 		// TODO: close and terminate
