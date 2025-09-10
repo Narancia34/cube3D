@@ -52,7 +52,7 @@ typedef struct s_mechanics t_mechanics;
 #  define HEIGHT 660
 # endif
 # ifndef WIDTH
-#  define WIDTH 660
+#  define WIDTH 1280
 # endif
 
 # ifndef FOV
@@ -96,6 +96,10 @@ typedef struct s_cub3d {
 	double		player_angle;
 	mlx_image_t	*scene_image;
 	t_ray		ray;
+	mlx_image_t	*img3;
+	mlx_image_t	*img4;
+	mlx_image_t	*img5;
+	mlx_image_t	*img6;
 }	t_cub3d;
 /*-----------------------------------------------*/
 

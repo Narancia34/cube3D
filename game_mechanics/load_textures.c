@@ -18,13 +18,20 @@ int	load_textures(t_cub3d *game)
 	mlx_texture_t* texture1 = mlx_load_png("./textures/Black.png");
 	mlx_texture_t* texture2 = mlx_load_png("./textures/white.png");
 	mlx_texture_t	*player = mlx_load_png("./textures/player_2.png");
-
+	mlx_texture_t	*texture3 = mlx_load_png("./textures/wolftex/pics/greystone.png");
+	mlx_texture_t	*texture4 = mlx_load_png("./textures/wolftex/pics/bluestone.png");
+	mlx_texture_t	*texture5 = mlx_load_png("./textures/wolftex/pics/eagle.png");
+	mlx_texture_t	*texture6 = mlx_load_png("./textures/wolftex/pics/mossy.png");
 
 	if (!texture1 || !texture2 || !player)
 		return(printf("error loading textures\n"), 1);
 	game->mechanics->img1 = mlx_texture_to_image(game->mlx, texture1);
 	game->mechanics->img2 = mlx_texture_to_image(game->mlx, texture2);
 	game->mechanics->player = mlx_texture_to_image(game->mlx, player);
+	game->img3 = mlx_texture_to_image(game->mlx, texture3);
+	game->img4 = mlx_texture_to_image(game->mlx, texture4);
+	game->img5 = mlx_texture_to_image(game->mlx, texture5);
+	game->img6 = mlx_texture_to_image(game->mlx, texture6);
 	if (NULL == game->mechanics->img1 || NULL == game->mechanics->img2 || NULL == game->mechanics->player)
 		return(printf("error transforming textures ti images\n"), 1);
 	mlx_resize_image(game->mechanics->img1, 4, 4);
