@@ -42,40 +42,34 @@ static void	player_new_position(double *new_x, double *new_y, t_cub3d *game)
 
 void	player_mouvement(t_cub3d *game)
 {
-	double	new_x = game->pxp;
-	double	new_y = game->pyp;
+	double		new_x;
+	double		new_y;
+	double		check_x;
+	double		check_y;
 
+	new_x = game->pxp;
+	new_y = game->pyp;
 	player_new_position(&new_x, &new_y, game);
-	// if (new_y < game->pyp)
-	// {
-	// 	if ('1' != game->parse->map[(int)floor(new_y)][(int)floor(game->pxp)])
-	// 		game->pyp = new_y;
-	// }
-	// else
-	// {
-	// 	if ('1' != game->parse->map[(int)round(new_y)][(int)round(game->pxp)])
-	// 		game->pyp = new_y;
-	// }
-	//
-	// if (new_x < game->pxp)
-	// {
-	// 	if ('1' != game->parse->map[(int)floor(game->pyp)][(int)floor(new_x)])
-	// 		game->pxp = new_x;
-	// }
-	// else
-	// {
-	// 	if ('1' != game->parse->map[(int)round(game->pyp)][(int)round(new_x)])
-	// 		game->pxp = new_x;
-	// }
-
-		if ('1' != game->parse->map[(int)floor(game->pyp)][(int)floor(new_x)])
-			game->pxp = new_x;
-		if ('1' != game->parse->map[(int)floor(new_y)][(int)floor(game->pxp)])
-			game->pyp = new_y;
-
-
+	// Check collision for the X-axis
+	check_x = new_x;
+	if (new_x > game->pxp)
+		check_x += 0.5;
+	else if (new_x < game->pxp)
+		check_x -= 0.5;
+	if ('1' != game->parse->map[(int)floor(game->pyp)][(int)floor(check_x)])
+		game->pxp = new_x;
+	// Check collision for the Y-axis, using the NEWLY updated player x_pos
+	check_y = new_y;
+	if (new_y > game->pyp)
+		check_y += 0.5;
+	else if (new_y < game->pyp)
+		check_y -= 0.5;
+	if ('1' != game->parse->map[(int)floor(check_y)][(int)floor(game->pxp)])
+		game->pyp = new_y;
 	// printf(YELLOW"x pos -- %f\n", game->pxp);
 	// printf(BLUE"y pos -- %f\n", game->pyp);
 	game->mechanics->player->instances[0].y = (int32_t)(game->pyp * 5 + 2);
 	game->mechanics->player->instances[0].x = (int32_t)(game->pxp * 5 + 2);
 }
+
+
