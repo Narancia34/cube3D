@@ -30,7 +30,7 @@ int	check_map_components(t_cub3d *game)
 				game->parse->player_direction = c;
 				game->parse->player++;
 			}
-			else if (c != '1' && c != '0' && c != 32)
+			else if (c != '1' && c != '0' && c != 32 && c != 'D')
 				return (printf(RED"Error:\nExtra map component"RESET), 0);
 		}
 	}

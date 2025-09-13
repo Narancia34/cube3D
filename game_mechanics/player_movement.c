@@ -56,7 +56,7 @@ void	player_mouvement(t_cub3d *game)
 		check_x += 0.5;
 	else if (new_x < game->pxp)
 		check_x -= 0.5;
-	if ('1' != game->parse->map[(int)floor(game->pyp)][(int)floor(check_x)])
+	if ('1' != game->parse->map[(int)floor(game->pyp)][(int)floor(check_x)] && 'D' != game->parse->map[(int)floor(game->pyp)][(int)floor(check_x)])
 		game->pxp = new_x;
 	// Check collision for the Y-axis, using the NEWLY updated player x_pos
 	check_y = new_y;
@@ -64,12 +64,12 @@ void	player_mouvement(t_cub3d *game)
 		check_y += 0.5;
 	else if (new_y < game->pyp)
 		check_y -= 0.5;
-	if ('1' != game->parse->map[(int)floor(check_y)][(int)floor(game->pxp)])
+	if ('1' != game->parse->map[(int)floor(check_y)][(int)floor(game->pxp)] && 'D' != game->parse->map[(int)floor(check_y)][(int)floor(game->pxp)])
 		game->pyp = new_y;
 	// printf(YELLOW"x pos -- %f\n", game->pxp);
 	// printf(BLUE"y pos -- %f\n", game->pyp);
-	game->mechanics->player->instances[0].y = (int32_t)(game->pyp * 5 + 2);
-	game->mechanics->player->instances[0].x = (int32_t)(game->pxp * 5 + 2);
+	game->tex.player->instances[0].y = (int32_t)(game->pyp * 5 + 2);
+	game->tex.player->instances[0].x = (int32_t)(game->pxp * 5 + 2);
 }
 
 

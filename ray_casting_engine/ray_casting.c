@@ -19,18 +19,21 @@ static int	is_wall(t_cub3d *game, int x, int y)
 		return (1);
 	if (!game->parse->map[y] || x >= (int)strlen(game->parse->map[y]))
 		return (1);
-	return (game->parse->map[y][x] == '1');
+	if (game->parse->map[y][x] == 'D')
+		game->ray.is_door = 1;
+	return (game->parse->map[y][x] == '1' || game->parse->map[y][x] == 'D');
 }
 
 void init_ray(t_cub3d *game, double ray_angle)
 {
-    game->ray.ray_dir_x = cos(ray_angle);
-    game->ray.ray_dir_y = sin(ray_angle);
-    game->ray.map_x = (int)game->pxp;
-    game->ray.map_y = (int)game->pyp;
-    game->ray.delta_dist_x = fabs(1.0 / game->ray.ray_dir_x);
-    game->ray.delta_dist_y = fabs(1.0 / game->ray.ray_dir_y);
-    game->ray.hit = 0;
+	game->ray.ray_dir_x = cos(ray_angle);
+	game->ray.ray_dir_y = sin(ray_angle);
+	game->ray.map_x = (int)game->pxp;
+	game->ray.map_y = (int)game->pyp;
+	game->ray.delta_dist_x = fabs(1.0 / game->ray.ray_dir_x);
+	game->ray.delta_dist_y = fabs(1.0 / game->ray.ray_dir_y);
+	game->ray.hit = 0;
+	game->ray.is_door = 0;
 }
 
 void get_side_dist(t_cub3d *game)
@@ -138,7 +141,7 @@ void	texture_mapping(t_cub3d *game, int x)
 	double	text_pos;
 	int	tex_x;
 	int	tex_y;
-    mlx_image_t *texture;
+	mlx_image_t *texture;
 
 	if (game->ray.side == 0)
 		wallx = game->pyp + game->ray.perp_wall_dist * game->ray.ray_dir_y;
@@ -156,14 +159,19 @@ void	texture_mapping(t_cub3d *game, int x)
 	{
 		tex_y = (int)text_pos & (63);
 		text_pos += step;
-        if (game->ray.side == 1 && game->ray.step_y == -1)
-            texture = game->img3;
-        else if (game->ray.side == 1 && game->ray.step_y == 1)
-            texture = game->img4;
-        else if (game->ray.side == 0 && game->ray.step_x == -1)
-            texture = game->img5;
-        else if (game->ray.side == 0 && game->ray.step_x == 1)
-            texture = game->img6;
+		if (game->ray.is_door == 1)
+			texture = game->tex.img7;
+		else
+		{
+			if (game->ray.side == 1 && game->ray.step_y == -1)
+				texture = game->tex.img3;
+			else if (game->ray.side == 1 && game->ray.step_y == 1)
+				texture = game->tex.img4;
+			else if (game->ray.side == 0 && game->ray.step_x == -1)
+				texture = game->tex.img5;
+			else if (game->ray.side == 0 && game->ray.step_x == 1)
+				texture = game->tex.img6;
+		}
 		uint32_t color = get_pixel(texture, tex_x, tex_y);
 		put_pixel(game->scene_image, x, y, color);
 	}

@@ -83,7 +83,20 @@ typedef struct s_ray{
 	int		wall_height;
 	int		wall_start;
 	int		wall_end;
+	int		is_door;
 } t_ray;
+
+typedef struct s_tex {
+
+	mlx_image_t	*player;
+	mlx_image_t	*img1;
+	mlx_image_t	*img2;
+	mlx_image_t	*img3;
+	mlx_image_t	*img4;
+	mlx_image_t	*img5;
+	mlx_image_t	*img6;
+	mlx_image_t	*img7;
+}	t_tex;
 
 // INFO: Game main struct
 /*-----------------------------------------------*/
@@ -96,10 +109,7 @@ typedef struct s_cub3d {
 	double		player_angle;
 	mlx_image_t	*scene_image;
 	t_ray		ray;
-	mlx_image_t	*img3;
-	mlx_image_t	*img4;
-	mlx_image_t	*img5;
-	mlx_image_t	*img6;
+	t_tex		tex;
 }	t_cub3d;
 /*-----------------------------------------------*/
 
@@ -125,10 +135,6 @@ struct s_parse {
 /*-----------------------------------------------*/
 
 struct s_mechanics {
-	mlx_image_t	*img1;
-	mlx_image_t	*img2;
-	mlx_image_t	*player;
-
 	// player rotation
 	int			pxd;
 	int			pyd;
