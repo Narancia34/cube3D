@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/08 15:30:18 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/15 18:33:14 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,13 @@ typedef struct s_tex {
 	mlx_image_t	*img7;
 }	t_tex;
 
+
+
+typedef struct s_textures{
+	mlx_image_t *gun_frames[15];
+} t_textures;
+
+
 // INFO: Game main struct
 /*-----------------------------------------------*/
 typedef struct s_cub3d {
@@ -110,6 +117,12 @@ typedef struct s_cub3d {
 	mlx_image_t	*scene_image;
 	t_ray		ray;
 	t_tex		tex;
+	t_textures textures;
+
+	// gun frames
+	bool		attack_animation;
+	int			gun_frame;
+	double		anim_timer;
 }	t_cub3d;
 /*-----------------------------------------------*/
 
@@ -171,5 +184,9 @@ void	player_rotation(t_cub3d *game);
 void    cast_rays(t_cub3d *game);
 void	cursor_handler(double xpos, double ypos, void *param);
 void	interact_with_doors(t_cub3d *game);
+void	play_gun_animation(t_cub3d *game);
+void	update_gun_animation(t_cub3d *game);
+void	load_gun_frames(t_cub3d *game);
+void	init_gun_frames(t_cub3d *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:45:33 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/08 16:05:09 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/15 18:33:49 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	set_game_parse(t_cub3d *game)
 	game->mechanics->move_forward = false;
 	game->mechanics->ctrl_pressed = false;
 
+	game->attack_animation = false;
 }
 
 int main(int ac, char **av)
@@ -43,6 +44,9 @@ int main(int ac, char **av)
 	render_2d_map(&game);
 	game.scene_image = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(game.mlx, game.scene_image, 0, 0);
+	game.scene_image->instances[0].z = 0;
+	load_gun_frames(&game);
+	init_gun_frames(&game);
 	mlx_key_hook(game.mlx, key_handler, &game);
 	mlx_set_cursor_mode(game.mlx, MLX_MOUSE_DISABLED);
 	mlx_cursor_hook(game.mlx, cursor_handler, &game);

@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 21:11:25 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/08 15:48:42 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/15 18:23:53 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ void	key_handler(mlx_key_data_t key, void *param)
 		mlx_set_cursor_mode(game->mlx, MLX_MOUSE_NORMAL);
 	else
 		mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
+
+	if (MLX_KEY_E == key.key && MLX_PRESS == key.action)
+		play_gun_animation(game);
 	if (MLX_KEY_SPACE == key.key)
 	{
 		if (MLX_PRESS == key.action)
