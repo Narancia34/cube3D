@@ -15,9 +15,9 @@
 void	put_img(t_cub3d *game, int xpos, int ypos, char c)
 {
 	if (c == '0' || ft_strchr("NEWS", c))
-		mlx_image_to_window(game->mlx, game->mechanics->img1, xpos, ypos);
+		mlx_image_to_window(game->mlx, game->tex.img1, xpos, ypos);
 	else if (c == '1')
-		mlx_image_to_window(game->mlx, game->mechanics->img2, xpos, ypos);
+		mlx_image_to_window(game->mlx, game->tex.img2, xpos, ypos);
 }
 
 void	render_2d_map(void *param)
@@ -39,7 +39,7 @@ void	render_2d_map(void *param)
 		i++;
 	}
 	// render player
-	mlx_image_to_window(game->mlx, game->mechanics->player,
+	mlx_image_to_window(game->mlx, game->tex.player,
 			game->pxp * 5 + 2, game->pyp * 5 + 2);
 	// game->tmp = 8;
 }
