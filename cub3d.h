@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/15 18:33:14 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/16 21:38:57 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,5 +188,6 @@ void	play_gun_animation(t_cub3d *game);
 void	update_gun_animation(t_cub3d *game);
 void	load_gun_frames(t_cub3d *game);
 void	init_gun_frames(t_cub3d *game);
+void	render_mini_map(t_cub3d *game);
 
 #endif
