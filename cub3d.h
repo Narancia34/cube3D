@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/05 00:34:02 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/16 22:12:59 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,83 @@
 /*-----------------------------------------------*/
 
 typedef struct s_parse t_parse;
+typedef struct s_mechanics t_mechanics;
+
+# ifndef HEIGHT
+#  define HEIGHT 660
+# endif
+# ifndef WIDTH
+#  define WIDTH 1280
+# endif
+
+# ifndef FOV
+#  define FOV 1.0472 // 60 degrees in radians
+# endif
+
+typedef enum {
+	FORWARD,
+	BACKWARD,
+	LEFT,
+	RIGHT,
+} t_move;
+
+typedef struct s_ray{
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		wall_height;
+	int		wall_start;
+	int		wall_end;
+	int		is_door;
+} t_ray;
+
+typedef struct s_tex {
+
+	mlx_image_t	*player;
+	mlx_image_t	*img1;
+	mlx_image_t	*img2;
+	mlx_image_t	*img3;
+	mlx_image_t	*img4;
+	mlx_image_t	*img5;
+	mlx_image_t	*img6;
+	mlx_image_t	*img7;
+}	t_tex;
+
+
+
+typedef struct s_textures{
+	mlx_image_t *gun_frames[15];
+} t_textures;
 
 
 // INFO: Game main struct
 /*-----------------------------------------------*/
 typedef struct s_cub3d {
-	t_parse	*parse;
-	mlx_t	*mlx;
+	mlx_t		*mlx;
+	t_parse		*parse;
+	t_mechanics	*mechanics;
+	double		pxp;
+	double		pyp;
+	double		player_angle;
+	mlx_image_t	*scene_image;
+	t_ray		ray;
+	t_tex		tex;
+	t_textures textures;
+
+	// gun frames
+	bool		attack_animation;
+	int			gun_frame;
+	double		anim_timer;
 }	t_cub3d;
 /*-----------------------------------------------*/
 
@@ -77,6 +147,21 @@ struct s_parse {
 };
 /*-----------------------------------------------*/
 
+struct s_mechanics {
+	// player rotation
+	int			pxd;
+	int			pyd;
+	bool		look_left;
+	bool		look_right;
+
+	// player mouvment
+	bool		move_forward;
+	bool		move_backward;
+	bool		move_right;
+	bool		move_left;
+	bool		ctrl_pressed;
+};
+
 
 void	parse_map(t_cub3d *game);
 char	**copy_map(t_cub3d *game);
@@ -94,5 +179,19 @@ void	complete_missing_cells(char **map);
 void	check_closed_map(char **map, t_cub3d *game);
 void	replace_spaces(char **map);
 
+void	render_2d_map(void *param);
+int		load_textures(t_cub3d *game);
+void	key_handler(mlx_key_data_t key, void *param);
+void	update_game(void *param);
+void	player_mouvement(t_cub3d *game);
+void	player_rotation(t_cub3d *game);
+void    cast_rays(t_cub3d *game);
+void	cursor_handler(double xpos, double ypos, void *param);
+void	interact_with_doors(t_cub3d *game);
+void	play_gun_animation(t_cub3d *game);
+void	update_gun_animation(t_cub3d *game);
+void	load_gun_frames(t_cub3d *game);
+void	init_gun_frames(t_cub3d *game);
+void	render_mini_map(t_cub3d *game);
 
 #endif
