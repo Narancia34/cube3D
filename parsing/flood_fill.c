@@ -6,24 +6,11 @@
 /*   By: mgamraou <mgamraou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 17:14:15 by mgamraou          #+#    #+#             */
-/*   Updated: 2025/08/12 17:41:31 by mgamraou         ###   ########.fr       */
+/*   Updated: 2025/09/05 14:29:52 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	free_map_copy(char **map_copy, int rows)
-{
-	int	i;
-
-	i = 0;
-	while (i < rows)
-	{
-		free(map_copy[i]);
-		i++;
-	}
-	free(map_copy);
-}
 
 char	**copy_map(t_cub3d *game)
 {
@@ -44,7 +31,8 @@ char	**copy_map(t_cub3d *game)
 		map_copy[i] = ft_strdup(game->parse->map[i]);
 		if (!map_copy[i])
 		{
-			free_map_copy(map_copy, i);
+			// free_map_copy(map_copy, i);
+			free_arr(map_copy);
 			printf("error\n");
 			exit(0);
 		}
@@ -65,7 +53,9 @@ void	find_player_position(t_cub3d *game)
 		x = 0;
 		while (game->parse->map[y][x])
 		{
-			if (game->parse->map[y][x] == 'N' || game->parse->map[y][x] == 'S' || game->parse->map[y][x] == 'E'
+			if (game->parse->map[y][x] == 'N'
+				|| game->parse->map[y][x] == 'S'
+				|| game->parse->map[y][x] == 'E'
 				|| game->parse->map[y][x] == 'W')
 			{
 				game->parse->pxp = x;

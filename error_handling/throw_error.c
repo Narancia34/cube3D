@@ -6,11 +6,19 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 21:00:43 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/12 19:37:57 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/05 15:28:15 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+static void	parse_error_extra(int error_code)
+{
+	if (10 == error_code)
+		printf(RED"Error:\nMap is not closed.\n"RESET);
+	else if (11 == error_code)
+		printf(RED"Error:\nMap content cannot be seperated by new lines.\n"RESET);
+}
 
 void	parse_error(int error_code, t_cub3d *game)
 {
@@ -29,5 +37,13 @@ void	parse_error(int error_code, t_cub3d *game)
 		printf(RED"Error:\nFile doesn't exist.\n"RESET);
 	else if (6 == error_code)
 		printf(RED"Error:\nMissing a .cub file.\n"RESET);
+	else if (7 == error_code)
+		printf(RED"Error:\nUnexpected map element.\n"RESET);
+	else if (8 == error_code)
+		printf(RED"Error:\nMore than one starting position.\n"RESET);
+	else if (9 == error_code)
+		printf(RED"Error:\nNo starting position.\n"RESET);
+	else
+		parse_error_extra(error_code);
 	destroy_parsing(game);
 }

@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/16 21:38:57 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/16 22:12:59 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,6 @@ struct s_mechanics {
 
 
 void	parse_map(t_cub3d *game);
-char	**get_map(t_cub3d *game);
 char	**copy_map(t_cub3d *game);
 void	free_map_copy(char **map_copy, int rows);
 void	find_player_position(t_cub3d *game);
@@ -175,6 +174,11 @@ void	check_rgb_values(char **colors, char **element, t_cub3d *game);
 void	parse_rgb(char **element, t_cub3d *game);
 void	parse_elements(t_cub3d *game);
 void	parse_file(char **av, t_cub3d *game);
+void	check_map_components(t_cub3d *game, char **map);
+void	complete_missing_cells(char **map);
+void	check_closed_map(char **map, t_cub3d *game);
+void	replace_spaces(char **map);
+
 void	render_2d_map(void *param);
 int		load_textures(t_cub3d *game);
 void	key_handler(mlx_key_data_t key, void *param);
