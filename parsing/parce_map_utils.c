@@ -31,7 +31,6 @@ char	**copy_map(t_cub3d *game)
 		map_copy[i] = ft_strdup(game->parse->map[i]);
 		if (!map_copy[i])
 		{
-			// free_map_copy(map_copy, i);
 			free_arr(map_copy);
 			printf("error\n");
 			exit(0);
@@ -68,27 +67,4 @@ void	find_player_position(t_cub3d *game)
 		}
 		y++;
 	}
-}
-
-void	flood_fill(char **map, int x, int y)
-{
-	if (x < 0 || y < 0 || !map[y] || x >= (int)ft_strlen(map[y]))
-	{
-		printf("Map is not closed");
-		exit(1);
-	}
-	if (map[y][x] == ' ' || map[y][x] == '\0')
-	{
-		printf("Map is not closed");
-		exit(1);
-	}
-	if (map[y][x] != '0' && map[y][x] != '1')
-		return ;
-	if (map[y][x] == '1')
-		return ;
-	map[y][x] = 'F';
-	flood_fill(map, x + 1, y);
-	flood_fill(map, x - 1, y);
-	flood_fill(map, x, y + 1);
-	flood_fill(map, x, y - 1);
 }

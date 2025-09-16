@@ -139,8 +139,6 @@ struct s_parse {
 	mlx_image_t	*west_texture;
 	int			floor_color[3];
 	int			ceiling_color[3];
-	int			player;
-	char		player_direction;
 	int			pxp;
 	int			pyp;
 	int			rows;
@@ -167,7 +165,6 @@ void	parse_map(t_cub3d *game);
 char	**copy_map(t_cub3d *game);
 void	free_map_copy(char **map_copy, int rows);
 void	find_player_position(t_cub3d *game);
-void	flood_fill(char **map, int x, int y);
 void	destroy_parsing(t_cub3d *game);
 void	parse_error(int error_code, t_cub3d *game);
 void	check_rgb_values(char **colors, char **element, t_cub3d *game);

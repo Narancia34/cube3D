@@ -35,7 +35,6 @@ int main(int ac, char **av)
 	ft_memset(&game, 0, sizeof(t_cub3d));
 	game.parse = malloc(sizeof(t_parse));
 	game.mechanics = malloc(sizeof(t_mechanics));
-	game.parse->player = 0;
 	set_game_parse(&game);
 	game.mlx = mlx_init(WIDTH, HEIGHT, "parsing", true);
 	parse_file(av, &game);
