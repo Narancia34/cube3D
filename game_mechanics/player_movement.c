@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 09:55:04 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/04 16:14:20 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:52:00 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	player_mouvement(t_cub3d *game)
 		game->pyp = new_y;
 	// printf(YELLOW"x pos -- %f\n", game->pxp);
 	// printf(BLUE"y pos -- %f\n", game->pyp);
-	game->tex.player->instances[0].y = (int32_t)(game->pyp * 5 + 2);
-	game->tex.player->instances[0].x = (int32_t)(game->pxp * 5 + 2);
+	// game->tex.player->instances[0].y = (int32_t)(game->pyp * 5 + 2);
+	// game->tex.player->instances[0].x = (int32_t)(game->pxp * 5 + 2);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:45:33 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/15 18:33:49 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:53:04 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main(int ac, char **av)
 	parse_file(av, &game);
 	if (load_textures(&game) != 0)
 		destroy_parsing(&game);
-	render_2d_map(&game);
+	// render_2d_map(&game);
 	game.scene_image = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(game.mlx, game.scene_image, 0, 0);
 	game.scene_image->instances[0].z = 0;

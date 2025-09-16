@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:23:49 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/15 18:23:11 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/16 17:33:16 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,5 @@ void	update_game(void *param)
 	player_rotation(game);
 	player_mouvement(game);
 	cast_rays(game);
-	draw_map_scene(game);
-	draw_player_pov(game);
 	update_gun_animation(game);
 }
