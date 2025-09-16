@@ -75,7 +75,7 @@ void	init_gun_frames(t_cub3d *game)
 	i = 0;
 	while (i < 15)
 	{
-		mlx_image_to_window(game->mlx, game->textures.gun_frames[i], 600, 500);
+		mlx_image_to_window(game->mlx, game->textures.gun_frames[i], 600, 325);
 		game->textures.gun_frames[i]->instances[0].z = 10;
 		game->textures.gun_frames[i]->instances[0].enabled = false;
 		i++;
