@@ -56,15 +56,15 @@ static bool	asign_rgb(char **colors, char **element, t_cub3d *game)
 		return (false);
 	if (!ft_strncmp(element[0], "F", 0))
 	{
-		game->parse->floor_color[0] = rgb[0];
-		game->parse->floor_color[1] = rgb[1];
-		game->parse->floor_color[2] = rgb[2];
+		game->textures.floor_color[0] = rgb[0];
+		game->textures.floor_color[1] = rgb[1];
+		game->textures.floor_color[2] = rgb[2];
 	}
 	else if (!ft_strncmp(element[0], "C", 0))
 	{
-		game->parse->ceiling_color[0] = rgb[0];
-		game->parse->ceiling_color[1] = rgb[1];
-		game->parse->ceiling_color[2] = rgb[2];
+		game->textures.ceiling_color[0] = rgb[0];
+		game->textures.ceiling_color[1] = rgb[1];
+		game->textures.ceiling_color[2] = rgb[2];
 	}
 	return (true);
 }

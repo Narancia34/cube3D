@@ -42,18 +42,18 @@ static void	render_tile(t_cub3d *game, int map_x, int map_y)
 
 	screen_x = (map_x - ((int)game->pxp - 10)) * 5;
 	screen_y = (map_y - ((int)game->pyp - 10)) * 5;
-	if (map_y >= 0 && map_y < game->parse->rows && map_x >= 0
-			&& map_x < (int)ft_strlen(game->parse->map[map_y]))
+	if (map_y >= 0 && map_y < game->parse.rows && map_x >= 0
+			&& map_x < (int)ft_strlen(game->map[map_y]))
 	{
-		if (game->parse->map[map_y][map_x] == '1')
-			render_square(game->scene_image, screen_x, screen_y, 0x000000FF);
-		else if (game->parse->map[map_y][map_x] == 'D')
-			render_square(game->scene_image, screen_x, screen_y, 0xab9a6aFF);
+		if (game->map[map_y][map_x] == '1')
+			render_square(game->textures.mini_map, screen_x, screen_y, 0x000000FF);
+		else if (game->map[map_y][map_x] == 'D')
+			render_square(game->textures.mini_map, screen_x, screen_y, 0xab9a6aFF);
 		else
-			render_square(game->scene_image, screen_x, screen_y, 0xfafafaFF);
+			render_square(game->textures.mini_map, screen_x, screen_y, 0xfafafaFF);
 	}
 	else
-		render_square(game->scene_image, screen_x, screen_y, 0xabababFF);
+		render_square(game->textures.mini_map, screen_x, screen_y, 0xabababFF);
 }
 
 void render_mini_map(t_cub3d *game)
@@ -75,5 +75,5 @@ void render_mini_map(t_cub3d *game)
 		}
 		map_y++;
 	}
-	render_square(game->scene_image, 10 * 5, 10 * 5, 0xff0505FF);
+	render_square(game->textures.mini_map, 10 * 5, 10 * 5, 0xff0505FF);
 }

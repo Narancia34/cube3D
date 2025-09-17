@@ -20,7 +20,7 @@ void	cursor_handler(double xpos, double ypos, void *param)
 
 	(void)ypos;
 	game = (t_cub3d *)param;
-	if (game->mechanics->ctrl_pressed)
+	if (game->mechanics.ctrl_pressed)
 		return ;
 	deltax = xpos - WIDTH / 2.0;
 	sensitivity = 0.005;

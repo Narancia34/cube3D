@@ -74,7 +74,7 @@ void	interact_with_doors(t_cub3d *game)
 
 	pxp = (int)floor(game->pxp);
 	pyp = (int)floor(game->pyp);
-	map = game->parse->map;
+	map = game->map;
 	direction = player_direction(game);
 	if (!open_doors(pxp, pyp, map, direction))
 		close_doors(pxp, pyp, map, direction);

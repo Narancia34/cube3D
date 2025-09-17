@@ -45,8 +45,6 @@
 # endif
 /*-----------------------------------------------*/
 
-typedef struct s_parse t_parse;
-typedef struct s_mechanics t_mechanics;
 
 # ifndef HEIGHT
 #  define HEIGHT 660
@@ -101,51 +99,30 @@ typedef struct s_tex {
 
 
 typedef struct s_textures{
-	mlx_image_t *gun_frames[15];
-} t_textures;
-
-
-// INFO: Game main struct
-/*-----------------------------------------------*/
-typedef struct s_cub3d {
-	mlx_t		*mlx;
-	t_parse		*parse;
-	t_mechanics	*mechanics;
-	double		pxp;
-	double		pyp;
-	double		player_angle;
-	mlx_image_t	*scene_image;
-	t_ray		ray;
-	t_tex		tex;
-	t_textures textures;
-
-	// gun frames
-	bool		attack_animation;
-	int			gun_frame;
-	double		anim_timer;
-}	t_cub3d;
-/*-----------------------------------------------*/
-
-
-// INFO: parcing struct
-/*-----------------------------------------------*/
-struct s_parse {
-	int			cub_file;
-	char		*file_name;
-	char		**map;
 	mlx_image_t	*north_texture;
 	mlx_image_t	*south_texture;
 	mlx_image_t	*east_texture;
 	mlx_image_t	*west_texture;
 	int			floor_color[3];
 	int			ceiling_color[3];
-	int			pxp;
-	int			pyp;
+	mlx_image_t *gun_frames[15];
+	mlx_image_t	*mini_map;
+} t_textures;
+
+// INFO: parcing struct
+/*-----------------------------------------------*/
+typedef struct s_parse {
+	int			cub_file;
+	char		*file_name; // WARN: not used
+	// int			pxp;
+	// int			pyp;
 	int			rows;
-};
+}	t_parse;
+
 /*-----------------------------------------------*/
 
-struct s_mechanics {
+
+typedef struct s_mechanics {
 	// player rotation
 	int			pxd;
 	int			pyd;
@@ -158,7 +135,29 @@ struct s_mechanics {
 	bool		move_right;
 	bool		move_left;
 	bool		ctrl_pressed;
-};
+}	t_mechanics;
+
+
+// INFO: Game main struct
+/*-----------------------------------------------*/
+typedef struct s_cub3d {
+	mlx_t		*mlx;
+	t_parse		parse;
+	t_mechanics	mechanics;
+	double		pxp;
+	double		pyp;
+	double		player_angle;
+	t_ray		ray;
+	t_tex		tex;
+	t_textures textures;
+
+	char		**map;
+	// gun frames
+	bool		attack_animation;
+	int			gun_frame;
+	double		anim_timer;
+}	t_cub3d;
+/*-----------------------------------------------*/
 
 
 void	parse_map(t_cub3d *game);

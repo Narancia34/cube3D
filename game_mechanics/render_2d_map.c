@@ -28,12 +28,12 @@ void	render_2d_map(void *param)
 
 	game = (t_cub3d *)param;
 	i = 0;
-	while (game->parse->map[i])
+	while (game->map[i])
 	{
 		j = 0;
-		while (game->parse->map[i][j])
+		while (game->map[i][j])
 		{
-			put_img(game, j * 5, i * 5, game->parse->map[i][j]);
+			put_img(game, j * 5, i * 5, game->map[i][j]);
 			j++;
 		}
 		i++;

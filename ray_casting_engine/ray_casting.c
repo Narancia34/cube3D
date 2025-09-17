@@ -15,13 +15,13 @@
 
 static int	is_wall(t_cub3d *game, int x, int y)
 {
-	if (x < 0 || y < 0 || y >= game->parse->rows)
+	if (x < 0 || y < 0 || y >= game->parse.rows)
 		return (1);
-	if (!game->parse->map[y] || x >= (int)strlen(game->parse->map[y]))
+	if (!game->map[y] || x >= (int)strlen(game->map[y]))
 		return (1);
-	if (game->parse->map[y][x] == 'D')
+	if (game->map[y][x] == 'D')
 		game->ray.is_door = 1;
-	return (game->parse->map[y][x] == '1' || game->parse->map[y][x] == 'D');
+	return (game->map[y][x] == '1' || game->map[y][x] == 'D');
 }
 
 void init_ray(t_cub3d *game, double ray_angle)
@@ -104,19 +104,19 @@ void draw_wall_line(t_cub3d *game, int x)
 	uint32_t	ceiling_color;
 	uint32_t	floor_color;
 
-	ceiling_color = (game->parse->ceiling_color[0] << 24) | 
-		(game->parse->ceiling_color[1] << 16) | 
-		(game->parse->ceiling_color[2] << 8) | 0xFF;
-	floor_color = (game->parse->floor_color[0] << 24) | 
-		(game->parse->floor_color[1] << 16) | 
-		(game->parse->floor_color[2] << 8) | 0xFF;
+	ceiling_color = (game->textures.ceiling_color[0] << 24) | 
+		(game->textures.ceiling_color[1] << 16) | 
+		(game->textures.ceiling_color[2] << 8) | 0xFF;
+	floor_color = (game->textures.floor_color[0] << 24) | 
+		(game->textures.floor_color[1] << 16) | 
+		(game->textures.floor_color[2] << 8) | 0xFF;
 	y = 0;
 	while (y < HEIGHT)
 	{
 		if (y < game->ray.wall_start)
-			mlx_put_pixel(game->scene_image, x, y, ceiling_color);
+			mlx_put_pixel(game->textures.mini_map, x, y, ceiling_color);
 		else if (y > game->ray.wall_end)
-			mlx_put_pixel(game->scene_image, x, y, floor_color);
+			mlx_put_pixel(game->textures.mini_map, x, y, floor_color);
 		y++;
 	}
 }
@@ -173,7 +173,7 @@ void	texture_mapping(t_cub3d *game, int x)
 				texture = game->tex.img6;
 		}
 		uint32_t color = get_pixel(texture, tex_x, tex_y);
-		put_pixel(game->scene_image, x, y, color);
+		put_pixel(game->textures.mini_map, x, y, color);
 	}
 }
 

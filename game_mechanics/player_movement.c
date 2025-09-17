@@ -18,22 +18,22 @@ static void	player_new_position(double *new_x, double *new_y, t_cub3d *game)
 	double dir_x = cos(game->player_angle);
 	double dir_y = sin(game->player_angle);
 
-	if (game->mechanics->move_forward)
+	if (game->mechanics.move_forward)
 	{
 		(*new_x) += dir_x * mouvment_speed * game->mlx->delta_time;
 		(*new_y) += dir_y * mouvment_speed * game->mlx->delta_time;
 	}
-	if (game->mechanics->move_backward)
+	if (game->mechanics.move_backward)
 	{
 		(*new_x) -= dir_x * mouvment_speed * game->mlx->delta_time;
 		(*new_y) -= dir_y * mouvment_speed * game->mlx->delta_time;
 	}
-	if (game->mechanics->move_right)
+	if (game->mechanics.move_right)
 	{
 		(*new_x) -= dir_y * mouvment_speed * game->mlx->delta_time;
 		(*new_y) += dir_x * mouvment_speed * game->mlx->delta_time;
 	}
-	if (game->mechanics->move_left)
+	if (game->mechanics.move_left)
 	{
 		(*new_x) += dir_y * mouvment_speed * game->mlx->delta_time;
 		(*new_y) -= dir_x * mouvment_speed * game->mlx->delta_time;
@@ -56,7 +56,7 @@ void	player_mouvement(t_cub3d *game)
 		check_x += 0.5;
 	else if (new_x < game->pxp)
 		check_x -= 0.5;
-	if ('1' != game->parse->map[(int)floor(game->pyp)][(int)floor(check_x)] && 'D' != game->parse->map[(int)floor(game->pyp)][(int)floor(check_x)])
+	if ('1' != game->map[(int)floor(game->pyp)][(int)floor(check_x)] && 'D' != game->map[(int)floor(game->pyp)][(int)floor(check_x)])
 		game->pxp = new_x;
 	// Check collision for the Y-axis, using the NEWLY updated player x_pos
 	check_y = new_y;
@@ -64,7 +64,7 @@ void	player_mouvement(t_cub3d *game)
 		check_y += 0.5;
 	else if (new_y < game->pyp)
 		check_y -= 0.5;
-	if ('1' != game->parse->map[(int)floor(check_y)][(int)floor(game->pxp)] && 'D' != game->parse->map[(int)floor(check_y)][(int)floor(game->pxp)])
+	if ('1' != game->map[(int)floor(check_y)][(int)floor(game->pxp)] && 'D' != game->map[(int)floor(check_y)][(int)floor(game->pxp)])
 		game->pyp = new_y;
 	// printf(YELLOW"x pos -- %f\n", game->pxp);
 	// printf(BLUE"y pos -- %f\n", game->pyp);

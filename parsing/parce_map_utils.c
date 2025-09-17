@@ -19,16 +19,16 @@ char	**copy_map(t_cub3d *game)
 	int		rows;
 
 	rows = 0;
-	while (game->parse->map[rows])
+	while (game->map[rows])
 		rows++;
-	game->parse->rows = rows;
+	game->parse.rows = rows;
 	map_copy = malloc((rows + 1) * sizeof(char *));
 	if (!map_copy)
 		exit(0);
 	i = 0;
 	while (i < rows)
 	{
-		map_copy[i] = ft_strdup(game->parse->map[i]);
+		map_copy[i] = ft_strdup(game->map[i]);
 		if (!map_copy[i])
 		{
 			free_arr(map_copy);
@@ -47,18 +47,18 @@ void	find_player_position(t_cub3d *game)
 	int	x;
 
 	y = 0;
-	while (game->parse->map[y])
+	while (game->map[y])
 	{
 		x = 0;
-		while (game->parse->map[y][x])
+		while (game->map[y][x])
 		{
-			if (game->parse->map[y][x] == 'N'
-				|| game->parse->map[y][x] == 'S'
-				|| game->parse->map[y][x] == 'E'
-				|| game->parse->map[y][x] == 'W')
+			if (game->map[y][x] == 'N'
+				|| game->map[y][x] == 'S'
+				|| game->map[y][x] == 'E'
+				|| game->map[y][x] == 'W')
 			{
-				game->parse->pxp = x;
-				game->parse->pyp = y;
+				game->pxp = x;
+				game->pyp = y;
 				game->pxp = x;
 				game->pyp = y;
 				return ;

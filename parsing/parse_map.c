@@ -30,7 +30,7 @@ static char	*check_rest_of_file(t_cub3d *game, char *file)
 {
 	char	*line;
 
-	line = get_next_line(game->parse->cub_file);
+	line = get_next_line(game->parse.cub_file);
 	while (line)
 	{
 		if (line[0])
@@ -40,7 +40,7 @@ static char	*check_rest_of_file(t_cub3d *game, char *file)
 			parse_error(11, game);
 		}
 		free(line);
-		line = get_next_line(game->parse->cub_file);
+		line = get_next_line(game->parse.cub_file);
 	}
 	return (file);
 }
@@ -51,13 +51,13 @@ static char	*read_map(t_cub3d *game)
 	char	*temp;
 	char	*line;
 
-	file = skip_newlines(game->parse->cub_file);
+	file = skip_newlines(game->parse.cub_file);
 	temp = file;
 	file = ft_strjoin(file, "\n");
 	free(temp);
 	while (1)
 	{
-		line = get_next_line(game->parse->cub_file);
+		line = get_next_line(game->parse.cub_file);
 		if (!line)
 			break ;
 		if (!line[0])
@@ -83,7 +83,7 @@ static void	get_map(t_cub3d *game)
 		exit (1);
 	map = ft_split(file, '\n');
 	replace_spaces(map);
-	game->parse->map = map;
+	game->map = map;
 	free(file);
 }
 
