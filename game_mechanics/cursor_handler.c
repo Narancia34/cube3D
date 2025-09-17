@@ -23,7 +23,7 @@ void	cursor_handler(double xpos, double ypos, void *param)
 	if (game->mechanics.pause_game)
 		return ;
 	deltax = xpos - WIDTH / 2.0;
-	sensitivity = 0.005;
+	sensitivity = 0.0005;
 	game->player_angle += deltax * sensitivity;
 	mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
 }

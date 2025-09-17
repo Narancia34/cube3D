@@ -20,8 +20,16 @@ void	init_game(t_cub3d *game)
 	game->textures.south_texture = NULL;
 	game->textures.east_texture = NULL;
 	game->textures.west_texture = NULL;
+	// mouvment
 	game->mechanics.move_forward = false;
+	game->mechanics.move_backward = false;
+	game->mechanics.move_left = false;
+	game->mechanics.move_right = false;
 	game->mechanics.pause_game = false;
+	// rotation
+	game->mechanics.look_right = false;
+	game->mechanics.look_left = false;
+
 	game->attack_animation = false;
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	game->textures.mini_map = mlx_new_image(game->mlx, WIDTH, HEIGHT);
