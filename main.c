@@ -38,8 +38,8 @@ int main(int ac, char **av)
 	set_game_parse(&game);
 	game.mlx = mlx_init(WIDTH, HEIGHT, "parsing", true);
 	parse_file(av, &game);
-	if (load_textures(&game) != 0)
-		destroy_parsing(&game);
+	/*if (load_textures(&game) != 0)*/
+	/*	destroy_parsing(&game);*/
 	// render_2d_map(&game);
 	game.textures.mini_map = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(game.mlx, game.textures.mini_map, 0, 0);

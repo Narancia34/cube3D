@@ -82,21 +82,13 @@ typedef struct s_ray{
 	int		wall_start;
 	int		wall_end;
 	int		is_door;
+	double	wallx;
+		double	step;
+	double	text_pos;
+	int	tex_x;
+	int	tex_y;
+	mlx_image_t *texture;
 } t_ray;
-
-typedef struct s_tex {
-
-	mlx_image_t	*player;
-	mlx_image_t	*img1;
-	mlx_image_t	*img2;
-	mlx_image_t	*img3;
-	mlx_image_t	*img4;
-	mlx_image_t	*img5;
-	mlx_image_t	*img6;
-	mlx_image_t	*img7;
-}	t_tex;
-
-
 
 typedef struct s_textures{
 	mlx_image_t	*north_texture;
@@ -148,7 +140,6 @@ typedef struct s_cub3d {
 	double		pyp;
 	double		player_angle;
 	t_ray		ray;
-	t_tex		tex;
 	t_textures textures;
 
 	char		**map;
@@ -189,5 +180,7 @@ void	update_gun_animation(t_cub3d *game);
 void	load_gun_frames(t_cub3d *game);
 void	init_gun_frames(t_cub3d *game);
 void	render_mini_map(t_cub3d *game);
+void	texture_mapping(t_cub3d *game, int x);
+void draw_wall_line(t_cub3d *game, int x);
 
 #endif

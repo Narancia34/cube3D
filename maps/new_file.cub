@@ -1,7 +1,7 @@
-NO ./textures/tree.png
-SO ./textures/tree.png
-WE ./textures/tree.png
-EA ./textures/tree.png
+NO ./textures/wolftex/pics/greystone.png
+SO ./textures/wolftex/pics/bluestone.png
+WE ./textures/wolftex/pics/eagle.png
+EA ./textures/wolftex/pics/mossy.png
 
 F 220,100,0
 C 225,30,0

@@ -6,7 +6,7 @@
 /*   By: mgamraou <mgamraou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 14:28:51 by mgamraou          #+#    #+#             */
-/*   Updated: 2025/09/03 14:28:53 by mgamraou         ###   ########.fr       */
+/*   Updated: 2025/09/17 17:37:18 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,90 +92,14 @@ double cast_single_ray(t_cub3d *game, double ray_angle)
         game->ray.perp_wall_dist = game->ray.side_dist_y - game->ray.delta_dist_y;
     return (game->ray.perp_wall_dist);
 }
+
 void calculate_wall_height(t_cub3d *game)
 {
     game->ray.wall_height = (int)(HEIGHT / game->ray.perp_wall_dist);
     game->ray.wall_start = (HEIGHT - game->ray.wall_height) / 2;
     game->ray.wall_end = game->ray.wall_start + game->ray.wall_height;
 }
-void draw_wall_line(t_cub3d *game, int x)
-{
-	int y;
-	uint32_t	ceiling_color;
-	uint32_t	floor_color;
 
-	ceiling_color = (game->textures.ceiling_color[0] << 24) | 
-		(game->textures.ceiling_color[1] << 16) | 
-		(game->textures.ceiling_color[2] << 8) | 0xFF;
-	floor_color = (game->textures.floor_color[0] << 24) | 
-		(game->textures.floor_color[1] << 16) | 
-		(game->textures.floor_color[2] << 8) | 0xFF;
-	y = 0;
-	while (y < HEIGHT)
-	{
-		if (y < game->ray.wall_start)
-			mlx_put_pixel(game->textures.mini_map, x, y, ceiling_color);
-		else if (y > game->ray.wall_end)
-			mlx_put_pixel(game->textures.mini_map, x, y, floor_color);
-		y++;
-	}
-}
-
-
-uint32_t get_pixel(mlx_image_t* tex, int x, int y) {
-    uint8_t* px = tex->pixels + (y * tex->width + x) * 4; // 4 bytes: RGBA
-    return *(uint32_t*)px; // packed 0xAABBGGRR
-}
-
-void put_pixel(mlx_image_t* img, int x, int y, uint32_t color) {
-    if (x < 0 || y < 0 || x >= (int)img->width || y >= (int)img->height)
-        return; // prevent segfault
-    uint8_t* dst = img->pixels + (y * img->width + x) * 4;
-    *(uint32_t*)dst = color;
-}
-
-void	texture_mapping(t_cub3d *game, int x)
-{
-	double	wallx;
-	double	step;
-	double	text_pos;
-	int	tex_x;
-	int	tex_y;
-	mlx_image_t *texture;
-
-	if (game->ray.side == 0)
-		wallx = game->pyp + game->ray.perp_wall_dist * game->ray.ray_dir_y;
-	else
-		wallx = game->pxp + game->ray.perp_wall_dist * game->ray.ray_dir_x;
-	wallx -= floor(wallx);
-	tex_x = (int)(wallx * 64);
-	if (game->ray.side == 0 && game->ray.ray_dir_x > 0)
-		tex_x = 64 - tex_x - 1;
-	if (game->ray.side == 1 && game->ray.ray_dir_y < 0)
-		tex_x = 64 - tex_x - 1;
-	step = 1.0 * 64 / game->ray.wall_height;
-	text_pos = (game->ray.wall_start - HEIGHT / 2 + game->ray.wall_height / 2) * step;
-	for (int y = game->ray.wall_start; y < game->ray.wall_end; y++)
-	{
-		tex_y = (int)text_pos & (63);
-		text_pos += step;
-		if (game->ray.is_door == 1)
-			texture = game->tex.img7;
-		else
-		{
-			if (game->ray.side == 1 && game->ray.step_y == -1)
-				texture = game->tex.img3;
-			else if (game->ray.side == 1 && game->ray.step_y == 1)
-				texture = game->tex.img4;
-			else if (game->ray.side == 0 && game->ray.step_x == -1)
-				texture = game->tex.img5;
-			else if (game->ray.side == 0 && game->ray.step_x == 1)
-				texture = game->tex.img6;
-		}
-		uint32_t color = get_pixel(texture, tex_x, tex_y);
-		put_pixel(game->textures.mini_map, x, y, color);
-	}
-}
 
 void    cast_rays(t_cub3d *game)
 {
