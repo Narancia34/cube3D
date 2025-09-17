@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-void	destroy_parsing(t_cub3d *game)
+void	destroy_game(t_cub3d *game, int exit_status)
 {
 	if (NULL == game)
 		exit(1);
@@ -28,5 +28,5 @@ void	destroy_parsing(t_cub3d *game)
 	mlx_terminate(game->mlx);
 	mlx_close_window(game->mlx);
 	// free(game->parse);
-	exit(1);
+	exit(exit_status);
 }

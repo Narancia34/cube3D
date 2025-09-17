@@ -45,5 +45,5 @@ void	parse_error(int error_code, t_cub3d *game)
 		printf(RED"Error:\nNo starting position.\n"RESET);
 	else
 		parse_error_extra(error_code);
-	destroy_parsing(game);
+	destroy_game(game, 1);
 }

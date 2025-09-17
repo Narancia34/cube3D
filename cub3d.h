@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/16 22:12:59 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/17 21:32:13 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ typedef struct s_mechanics {
 	bool		move_backward;
 	bool		move_right;
 	bool		move_left;
-	bool		ctrl_pressed;
+	bool		pause_game;
 }	t_mechanics;
 
 
@@ -155,7 +155,7 @@ void	parse_map(t_cub3d *game);
 char	**copy_map(t_cub3d *game);
 void	free_map_copy(char **map_copy, int rows);
 void	find_player_position(t_cub3d *game);
-void	destroy_parsing(t_cub3d *game);
+void	destroy_game(t_cub3d *game, int exit_status);
 void	parse_error(int error_code, t_cub3d *game);
 void	check_rgb_values(char **colors, char **element, t_cub3d *game);
 void	parse_rgb(char **element, t_cub3d *game);
@@ -181,6 +181,7 @@ void	load_gun_frames(t_cub3d *game);
 void	init_gun_frames(t_cub3d *game);
 void	render_mini_map(t_cub3d *game);
 void	texture_mapping(t_cub3d *game, int x);
-void draw_wall_line(t_cub3d *game, int x);
+void	draw_wall_line(t_cub3d *game, int x);
+void mouse_click_handler(mouse_key_t button, action_t action, modifier_key_t mods, void* param);
 
 #endif

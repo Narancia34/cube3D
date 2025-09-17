@@ -15,12 +15,18 @@
 static void	player_rotation_key(t_cub3d *game, mlx_key_data_t *key)
 {
 
-	if (MLX_KEY_LEFT_CONTROL == key->key)
+	// if (MLX_KEY_LEFT_CONTROL == key->key && MLX_PRESS == key->action)
+	if (MLX_KEY_P == key->key && MLX_PRESS == key->action)
 	{
-		if (MLX_PRESS == key->action)
-			game->mechanics.ctrl_pressed = true;
-		else if(MLX_RELEASE == key->action)
-			game->mechanics.ctrl_pressed = false;
+		// TODO: add a pause screen 
+		if (true == game->mechanics.pause_game)
+			game->mechanics.pause_game = false;
+		else if (false == game->mechanics.pause_game)
+			game->mechanics.pause_game = true;
+		// if (MLX_PRESS == key->action)
+		// 	game->mechanics.ctrl_pressed = true;
+		// else if(MLX_RELEASE == key->action)
+		// 	game->mechanics.ctrl_pressed = false;
 	}
 	if (MLX_KEY_LEFT == key->key)
 	{
@@ -81,15 +87,15 @@ void	key_handler(mlx_key_data_t key, void *param)
 
 	player_rotation_key(game, &key);
 	player_mouvement_key(game, &key);
-	if (game->mechanics.ctrl_pressed)
+	if (game->mechanics.pause_game)
 		mlx_set_cursor_mode(game->mlx, MLX_MOUSE_NORMAL);
 	else
 		mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
 
 	if (MLX_KEY_E == key.key && MLX_PRESS == key.action)
 		interact_with_doors(game);
-	if (MLX_KEY_SPACE == key.key && MLX_PRESS == key.action)
-			play_gun_animation(game);
+	// if (MLX_KEY_SPACE == key.key && MLX_PRESS == key.action)
+	// 		play_gun_animation(game);
 	if (MLX_KEY_ESCAPE == key.key && MLX_PRESS == key.action)
 	{
 		// TODO: close and terminate

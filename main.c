@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	set_game_parse(t_cub3d *game)
+void	init_game(t_cub3d *game)
 {
 	game->parse.file_name = NULL;
 	game->map = NULL;
@@ -20,11 +20,16 @@ void	set_game_parse(t_cub3d *game)
 	game->textures.south_texture = NULL;
 	game->textures.east_texture = NULL;
 	game->textures.west_texture = NULL;
-
 	game->mechanics.move_forward = false;
-	game->mechanics.ctrl_pressed = false;
-
+	game->mechanics.pause_game = false;
 	game->attack_animation = false;
+	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
+	game->textures.mini_map = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+}
+
+void	close_game(void *param)
+{
+	destroy_game((t_cub3d *)param, 0);
 }
 
 int main(int ac, char **av)
@@ -35,23 +40,23 @@ int main(int ac, char **av)
 	// ft_memset(&game, 0, sizeof(t_cub3d));
 	// game.parse = malloc(sizeof(t_parse));
 	// game.mechanics = malloc(sizeof(t_mechanics));
-	set_game_parse(&game);
-	game.mlx = mlx_init(WIDTH, HEIGHT, "parsing", true);
+	init_game(&game);
 	parse_file(av, &game);
 	/*if (load_textures(&game) != 0)*/
 	/*	destroy_parsing(&game);*/
 	// render_2d_map(&game);
-	game.textures.mini_map = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(game.mlx, game.textures.mini_map, 0, 0);
-	game.textures.mini_map->instances[0].z = 0;
+	// game.textures.mini_map->instances[0].z = 0;
 	load_gun_frames(&game);
 	init_gun_frames(&game);
 	mlx_key_hook(game.mlx, key_handler, &game);
 	mlx_set_cursor_mode(game.mlx, MLX_MOUSE_DISABLED);
 	mlx_cursor_hook(game.mlx, cursor_handler, &game);
+	mlx_mouse_hook(game.mlx, mouse_click_handler, &game);
 	// TODO: mlx_close_hook(); to close cleanly
+	mlx_close_hook(game.mlx, close_game, &game);
 	mlx_loop_hook(game.mlx, update_game, &game);
 	mlx_loop(game.mlx);
-	destroy_parsing(&game);
+	// destroy_game(&game, 0);
 	return (0);
 }
