@@ -14,7 +14,6 @@
 
 void	init_game(t_cub3d *game)
 {
-	game->parse.file_name = NULL;
 	game->map = NULL;
 	game->textures.north_texture = NULL;
 	game->textures.south_texture = NULL;

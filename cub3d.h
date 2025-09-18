@@ -105,7 +105,6 @@ typedef struct s_textures{
 /*-----------------------------------------------*/
 typedef struct s_parse {
 	int			cub_file;
-	char		*file_name; // WARN: not used
 	// int			pxp;
 	// int			pyp;
 	int			rows;
