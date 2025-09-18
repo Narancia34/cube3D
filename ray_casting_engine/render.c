@@ -6,7 +6,7 @@
 /*   By: mgamraou <mgamraou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 17:35:15 by mgamraou          #+#    #+#             */
-/*   Updated: 2025/09/17 18:12:08 by mgamraou         ###   ########.fr       */
+/*   Updated: 2025/09/18 16:29:00 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,9 @@ void	texture_mapping(t_cub3d *game, int x)
 		game->ray.tex_y = (int)game->ray.text_pos & (63);
 		game->ray.text_pos += game->ray.step;
 		if (game->ray.is_door == 1)
-			game->ray.texture = game->textures.east_texture;
+			game->ray.texture = game->textures.door;
 		else
-		{
-			if (game->ray.side == 1 && game->ray.step_y == -1)
-				game->ray.texture = game->textures.north_texture;
-			else if (game->ray.side == 1 && game->ray.step_y == 1)
-				game->ray.texture = game->textures.south_texture;
-			else if (game->ray.side == 0 && game->ray.step_x == -1)
-				game->ray.texture = game->textures.west_texture;
-			else if (game->ray.side == 0 && game->ray.step_x == 1)
-				game->ray.texture = game->textures.east_texture;
-		}
+			render_non_doors(game);
 		uint32_t color = get_pixel(game->ray.texture, game->ray.tex_x, game->ray.tex_y);
 		put_pixel(game->textures.mini_map, x, y, color);
 		y++;

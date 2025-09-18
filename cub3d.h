@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/17 21:32:13 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/18 16:24:55 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ typedef struct s_textures{
 	int			ceiling_color[3];
 	mlx_image_t *gun_frames[15];
 	mlx_image_t	*mini_map;
+	mlx_image_t	*door;
+	mlx_image_t	*door_side;
 } t_textures;
 
 // INFO: parcing struct
@@ -181,6 +183,7 @@ void	init_gun_frames(t_cub3d *game);
 void	render_mini_map(t_cub3d *game);
 void	texture_mapping(t_cub3d *game, int x);
 void	draw_wall_line(t_cub3d *game, int x);
-void mouse_click_handler(mouse_key_t button, action_t action, modifier_key_t mods, void* param);
+void	mouse_click_handler(mouse_key_t button, action_t action, modifier_key_t mods, void* param);
+void	render_non_doors(t_cub3d *game);
 
 #endif

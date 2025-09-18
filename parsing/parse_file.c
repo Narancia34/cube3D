@@ -32,5 +32,4 @@ void	parse_file(char **av, t_cub3d *game)
 	parse_elements(game);
 	parse_map(game);
 	close(game->parse.cub_file);
-	printf(GREEN"Parsing done correctlly\n"RESET);
 }
