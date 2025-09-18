@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 09:55:04 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/16 16:52:00 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/18 17:07:36 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,36 +40,46 @@ static void	player_new_position(double *new_x, double *new_y, t_cub3d *game)
 	}
 }
 
+static bool	is_obstacle(t_cub3d *game, int x, int y)
+{
+	char	c;
+
+	if (y < 0 || x < 0
+		|| y >= game->parse.rows
+		|| x >= (int)ft_strlen(game->map[y]))
+		return (true);
+	c = game->map[y][x];
+	return (c == '1' || c == 'D');
+}
+
+static bool	is_blocked(t_cub3d *game, double x, double y)
+{
+	double	radius;
+
+	radius = 0.3;
+	return (is_obstacle(game, (int)(x - radius), (int)(y - radius))
+		|| is_obstacle(game, (int)(x + radius), (int)(y - radius))
+		|| is_obstacle(game, (int)(x - radius), (int)(y + radius))
+		|| is_obstacle(game, (int)(x + radius), (int)(y + radius)));
+}
+
+static void	update_position(t_cub3d *game, double new_x, double new_y)
+{
+	if (!is_blocked(game, new_x, game->pyp))
+		game->pxp = new_x;
+	if (!is_blocked(game, game->pxp, new_y))
+		game->pyp = new_y;
+}
+
 void	player_mouvement(t_cub3d *game)
 {
 	double		new_x;
 	double		new_y;
-	double		check_x;
-	double		check_y;
 
 	new_x = game->pxp;
 	new_y = game->pyp;
 	player_new_position(&new_x, &new_y, game);
-	// Check collision for the X-axis
-	check_x = new_x;
-	if (new_x > game->pxp)
-		check_x += 0.5;
-	else if (new_x < game->pxp)
-		check_x -= 0.5;
-	if ('1' != game->map[(int)floor(game->pyp)][(int)floor(check_x)] && 'D' != game->map[(int)floor(game->pyp)][(int)floor(check_x)])
-		game->pxp = new_x;
-	// Check collision for the Y-axis, using the NEWLY updated player x_pos
-	check_y = new_y;
-	if (new_y > game->pyp)
-		check_y += 0.5;
-	else if (new_y < game->pyp)
-		check_y -= 0.5;
-	if ('1' != game->map[(int)floor(check_y)][(int)floor(game->pxp)] && 'D' != game->map[(int)floor(check_y)][(int)floor(game->pxp)])
-		game->pyp = new_y;
-	// printf(YELLOW"x pos -- %f\n", game->pxp);
-	// printf(BLUE"y pos -- %f\n", game->pyp);
-	// game->tex.player->instances[0].y = (int32_t)(game->pyp * 5 + 2);
-	// game->tex.player->instances[0].x = (int32_t)(game->pxp * 5 + 2);
+	update_position(game, new_x, new_y);
 }
 
 
