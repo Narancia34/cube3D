@@ -33,6 +33,7 @@ void	init_game(t_cub3d *game)
 	game->attack_animation = false;
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	game->textures.mini_map = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->ray.texture = NULL;
 }
 
 void	close_game(void *param)

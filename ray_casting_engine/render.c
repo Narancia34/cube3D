@@ -37,10 +37,7 @@ void draw_wall_line(t_cub3d *game, int x)
 
 static uint32_t get_pixel(mlx_image_t* tex, int x, int y)
 {
-	uint8_t* px;
-
-	px = tex->pixels + (y * tex->width + x) * 4;
-	return *(uint32_t*)px;
+	return (*((uint32_t*)(tex->pixels + (y * tex->width + x) * 4)));
 }
 
 static void	put_pixel(mlx_image_t* img, int x, int y, uint32_t color)
