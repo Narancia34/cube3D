@@ -6,67 +6,19 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:45:33 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/18 18:06:31 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/18 19:01:02 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	init_images(t_cub3d *game)
-{
-	mlx_texture_t	*texture;
-
-	texture = mlx_load_png("./textures/door.png");
-	game->textures.door = mlx_texture_to_image(game->mlx, texture);
-	mlx_delete_texture(texture);
-	texture = mlx_load_png("./textures/door_sides.png");
-	game->textures.door_side = mlx_texture_to_image(game->mlx, texture);
-	mlx_delete_texture(texture);
-}
-
-static void	init_game(t_cub3d *game, int ac)
-{
-	(void)ac;
-	game->map = NULL;
-	game->textures.north_texture = NULL;
-	game->textures.south_texture = NULL;
-	game->textures.east_texture = NULL;
-	game->textures.west_texture = NULL;
-	game->mechanics.move_forward = false;
-	game->mechanics.move_backward = false;
-	game->mechanics.move_left = false;
-	game->mechanics.move_right = false;
-	game->mechanics.pause_game = false;
-	game->mechanics.look_right = false;
-	game->mechanics.look_left = false;
-	game->attack_animation = false;
-	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
-	game->textures.mini_map = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->ray.texture = NULL;
-	game->parse.floor_color = false;
-	game->parse.ceiling_color = false;
-	init_images(game);
-}
-
-void	close_game(void *param)
-{
-	destroy_game((t_cub3d *)param, 0);
-}
-
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_cub3d	game;
-	
+
 	init_game(&game, ac);
 	parse_file(av, &game);
-	mlx_image_to_window(game.mlx, game.textures.mini_map, 0, 0);
-	load_gun_frames(&game);
-	init_gun_frames(&game);
-	mlx_key_hook(game.mlx, key_handler, &game);
-	mlx_set_cursor_mode(game.mlx, MLX_MOUSE_DISABLED);
-	mlx_cursor_hook(game.mlx, cursor_handler, &game);
-	mlx_mouse_hook(game.mlx, mouse_click_handler, &game);
-	mlx_close_hook(game.mlx, close_game, &game);
-	mlx_loop_hook(game.mlx, update_game, &game);
+	init_textures(&game);
+	install_hooks(&game);
 	mlx_loop(game.mlx);
 }

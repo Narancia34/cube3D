@@ -12,22 +12,25 @@
 
 #include "../cub3d.h"
 
-static void	render_square(mlx_image_t* image, int start_x, int start_y, uint32_t color)
+static void	render_square(mlx_image_t *image, int start_x,
+		int start_y, uint32_t color)
 {
-	int x;
-	int y = start_y;
+	int	x;
+	int	y;
 	int	size;
 
 	if (0xff0505FF == color)
 		size = 3;
 	else
 		size = 5;
+	y = start_y;
 	while (y < start_y + size)
 	{
 		x = start_x;
 		while (x < start_x + size)
 		{
-			if (x >= 0 && x < (int)image->width && y >= 0 && y < (int)image->height)
+			if (x >= 0 && x < (int)image->width
+				&& y >= 0 && y < (int)image->height)
 				mlx_put_pixel(image, x, y, color);
 			x++;
 		}
@@ -37,34 +40,37 @@ static void	render_square(mlx_image_t* image, int start_x, int start_y, uint32_t
 
 static void	render_tile(t_cub3d *game, int map_x, int map_y)
 {
-	int screen_x;
-	int screen_y;
+	int	screen_x;
+	int	screen_y;
 
 	screen_x = (map_x - ((int)game->pxp - 10)) * 5;
 	screen_y = (map_y - ((int)game->pyp - 10)) * 5;
 	if (map_y >= 0 && map_y < game->parse.rows && map_x >= 0
-			&& map_x < (int)ft_strlen(game->map[map_y]))
+		&& map_x < (int)ft_strlen(game->map[map_y]))
 	{
 		if (game->map[map_y][map_x] == '1')
-			render_square(game->textures.mini_map, screen_x, screen_y, 0x000000FF);
+			render_square(game->textures.mini_map,
+				screen_x, screen_y, 0x000000FF);
 		else if (game->map[map_y][map_x] == 'D')
-			render_square(game->textures.mini_map, screen_x, screen_y, 0xab9a6aFF);
+			render_square(game->textures.mini_map,
+				screen_x, screen_y, 0xab9a6aFF);
 		else
-			render_square(game->textures.mini_map, screen_x, screen_y, 0xfafafaFF);
+			render_square(game->textures.mini_map,
+				screen_x, screen_y, 0xfafafaFF);
 	}
 	else
-		render_square(game->textures.mini_map, screen_x, screen_y, 0xabababFF);
+		render_square(game->textures.mini_map,
+			screen_x, screen_y, 0xabababFF);
 }
 
-void render_mini_map(t_cub3d *game)
+void	render_mini_map(t_cub3d *game)
 {
-	int map_x;
-	int map_y;
+	int			map_x;
+	int			map_y;
+	const int	max_y = (int)game->pyp + 10;
+	const int	max_x = (int)game->pxp + 10;
 
 	map_y = (int)game->pyp - 10;
-	const int max_y = (int)game->pyp + 10;
-	const int max_x = (int)game->pxp + 10;
-
 	while (map_y <= max_y)
 	{
 		map_x = (int)game->pxp - 10;

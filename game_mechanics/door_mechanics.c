@@ -67,8 +67,8 @@ void	close_doors(int pxp, int pyp, char **map, char direction)
 
 void	interact_with_doors(t_cub3d *game)
 {
-	int	pxp;
-	int	pyp;
+	int		pxp;
+	int		pyp;
 	char	**map;
 	char	direction;
 

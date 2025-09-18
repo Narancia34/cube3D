@@ -28,7 +28,8 @@ void	cursor_handler(double xpos, double ypos, void *param)
 	mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
 }
 
-void	mouse_click_handler(mouse_key_t button, action_t action, modifier_key_t mods, void* param)
+void	mouse_click_handler(mouse_key_t button, action_t action,
+		modifier_key_t mods, void *param)
 {
 	t_cub3d	*game;
 

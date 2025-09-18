@@ -28,7 +28,7 @@ SRCS =	$(shell ls ./parsing/*.c) \
 		$(shell ls ./error_handling/*.c) \
 		$(shell ls ./game_mechanics/*.c) \
 		$(shell ls ./ray_casting_engine/*.c) \
-		./main.c ./update_game.c \
+		./main.c ./install_hooks.c ./init_game.c \
 
 OFILES = $(SRCS:.c=.o)
 

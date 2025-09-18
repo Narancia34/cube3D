@@ -64,7 +64,7 @@ static void	check_midle_lines(int j, char **map, t_cub3d *game)
 		return (free_arr(map), parse_error(10, game));
 	else if (map[j][i] && '?' == map[j][i])
 	{
-		if  ('1' != map[j][i - 1])
+		if ('1' != map[j][i - 1])
 			return (free_arr(map), parse_error(10, game));
 		while (map[j][i])
 		{

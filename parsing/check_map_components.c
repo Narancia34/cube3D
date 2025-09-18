@@ -15,7 +15,7 @@
 static void	set_player_angle(t_cub3d *game, char direction, int *player)
 {
 	if ('N' == direction)
-		game->player_angle = -M_PI/2.0;
+		game->player_angle = -M_PI / 2.0;
 	else if ('S' == direction)
 		game->player_angle = M_PI / 2.0;
 	else if ('W' == direction)

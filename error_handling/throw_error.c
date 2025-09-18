@@ -17,13 +17,17 @@ static void	parse_error_extra(int error_code)
 	if (10 == error_code)
 		printf(RED"Error:\nMap is not closed.\n"RESET);
 	else if (11 == error_code)
-		printf(RED"Error:\nMap content cannot be seperated by new lines.\n"RESET);
-	else if (12 == error_code)
-		printf(RED"Error:\nUnexpected character in one of R,G,B element.\n"RESET);
-	else if (13 == error_code)
 	{
-		printf(RED"Error:\nMissing element.\n"RESET);
+		printf(RED"Error:\nMap content cannot be seperated");
+		printf("by new lines.\n"RESET);
 	}
+	else if (12 == error_code)
+	{
+		printf(RED"Error:\nUnexpected character in one of");
+		printf("R,G,B element.\n"RESET);
+	}
+	else if (13 == error_code)
+		printf(RED"Error:\nMissing element.\n"RESET);
 }
 
 void	parse_error(int error_code, t_cub3d *game)

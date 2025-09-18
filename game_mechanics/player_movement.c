@@ -14,29 +14,30 @@
 
 static void	player_new_position(double *new_x, double *new_y, t_cub3d *game)
 {
-	const double mouvment_speed = 3.0;
-	double dir_x = cos(game->player_angle);
-	double dir_y = sin(game->player_angle);
+	double	dir_x;
+	double	dir_y;
 
+	dir_x = cos(game->player_angle);
+	dir_y = sin(game->player_angle);
 	if (game->mechanics.move_forward)
 	{
-		(*new_x) += dir_x * mouvment_speed * game->mlx->delta_time;
-		(*new_y) += dir_y * mouvment_speed * game->mlx->delta_time;
+		(*new_x) += dir_x * 3.0 * game->mlx->delta_time;
+		(*new_y) += dir_y * 3.0 * game->mlx->delta_time;
 	}
 	if (game->mechanics.move_backward)
 	{
-		(*new_x) -= dir_x * mouvment_speed * game->mlx->delta_time;
-		(*new_y) -= dir_y * mouvment_speed * game->mlx->delta_time;
+		(*new_x) -= dir_x * 3.0 * game->mlx->delta_time;
+		(*new_y) -= dir_y * 3.0 * game->mlx->delta_time;
 	}
 	if (game->mechanics.move_right)
 	{
-		(*new_x) -= dir_y * mouvment_speed * game->mlx->delta_time;
-		(*new_y) += dir_x * mouvment_speed * game->mlx->delta_time;
+		(*new_x) -= dir_y * 3.0 * game->mlx->delta_time;
+		(*new_y) += dir_x * 3.0 * game->mlx->delta_time;
 	}
 	if (game->mechanics.move_left)
 	{
-		(*new_x) += dir_y * mouvment_speed * game->mlx->delta_time;
-		(*new_y) -= dir_x * mouvment_speed * game->mlx->delta_time;
+		(*new_x) += dir_y * 3.0 * game->mlx->delta_time;
+		(*new_y) -= dir_x * 3.0 * game->mlx->delta_time;
 	}
 }
 
@@ -81,5 +82,3 @@ void	player_mouvement(t_cub3d *game)
 	player_new_position(&new_x, &new_y, game);
 	update_position(game, new_x, new_y);
 }
-
-

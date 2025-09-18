@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../cub3d.h"
 
 static char	*skip_newlines(int fd)
@@ -61,7 +60,7 @@ static char	*read_map(t_cub3d *game)
 		if (!line)
 			break ;
 		if (!line[0])
-			return (free(line), check_rest_of_file(game ,file));
+			return (free(line), check_rest_of_file(game, file));
 		temp = file;
 		file = ft_strjoin(file, line);
 		free(temp);

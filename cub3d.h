@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:35:24 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/18 18:06:31 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/18 19:00:44 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/time.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <stdint.h>
 
 // INFO: colors
 /*-----------------------------------------------*/
@@ -55,60 +56,65 @@
 #  define FOV 1.0472
 # endif
 
-typedef enum {
+typedef enum s_move
+{
 	FORWARD,
 	BACKWARD,
 	LEFT,
 	RIGHT,
-} t_move;
+}	t_move;
 
-typedef struct s_ray{
-	double	ray_dir_x;
-	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	perp_wall_dist;
-	int		step_x;
-	int		step_y;
-	int		hit;
-	int		side;
-	int		wall_height;
-	int		wall_start;
-	int		wall_end;
-	int		is_door;
-	double	wallx;
-		double	step;
-	double	text_pos;
-	int	tex_x;
-	int	tex_y;
-	mlx_image_t *texture;
-} t_ray;
+typedef struct s_ray
+{
+	double		ray_dir_x;
+	double		ray_dir_y;
+	int			map_x;
+	int			map_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
+	int			wall_height;
+	int			wall_start;
+	int			wall_end;
+	int			is_door;
+	double		wallx;
+	double		step;
+	double		text_pos;
+	int			tex_x;
+	int			tex_y;
+	mlx_image_t	*texture;
+}	t_ray;
 
-typedef struct s_textures{
+typedef struct s_textures
+{
 	mlx_image_t	*north_texture;
 	mlx_image_t	*south_texture;
 	mlx_image_t	*east_texture;
 	mlx_image_t	*west_texture;
 	int			floor_color[3];
 	int			ceiling_color[3];
-	mlx_image_t *gun_frames[15];
+	mlx_image_t	*gun_frames[15];
 	mlx_image_t	*mini_map;
 	mlx_image_t	*door;
 	mlx_image_t	*door_side;
-} t_textures;
+}	t_textures;
 
-typedef struct s_parse {
+typedef struct s_parse
+{
 	int			cub_file;
 	bool		floor_color;
 	bool		ceiling_color;
 	int			rows;
 }	t_parse;
 
-typedef struct s_mechanics {
+typedef struct s_mechanics
+{
 	int			pxd;
 	int			pyd;
 	bool		look_left;
@@ -120,15 +126,15 @@ typedef struct s_mechanics {
 	bool		pause_game;
 }	t_mechanics;
 
-
 // INFO: Game main struct
 /*-----------------------------------------------*/
-typedef struct s_cub3d {
+typedef struct s_cub3d
+{
 	mlx_t		*mlx;
 	char		**map;
 	t_parse		parse;
 	t_mechanics	mechanics;
-	t_textures textures;
+	t_textures	textures;
 	t_ray		ray;
 	double		pxp;
 	double		pyp;
@@ -138,7 +144,6 @@ typedef struct s_cub3d {
 	int			gun_frame;
 }	t_cub3d;
 /*-----------------------------------------------*/
-
 
 void	parse_map(t_cub3d *game);
 char	**copy_map(t_cub3d *game);
@@ -157,10 +162,9 @@ void	replace_spaces(char **map);
 void	render_2d_map(void *param);
 int		load_textures(t_cub3d *game);
 void	key_handler(mlx_key_data_t key, void *param);
-void	update_game(void *param);
 void	player_mouvement(t_cub3d *game);
 void	player_rotation(t_cub3d *game);
-void    cast_rays(t_cub3d *game);
+void	cast_rays(t_cub3d *game);
 void	cursor_handler(double xpos, double ypos, void *param);
 void	interact_with_doors(t_cub3d *game);
 void	play_gun_animation(t_cub3d *game);
@@ -170,7 +174,12 @@ void	init_gun_frames(t_cub3d *game);
 void	render_mini_map(t_cub3d *game);
 void	texture_mapping(t_cub3d *game, int x);
 void	draw_wall_line(t_cub3d *game, int x);
-void	mouse_click_handler(mouse_key_t button, action_t action, modifier_key_t mods, void* param);
+void	mouse_click_handler(mouse_key_t button, action_t action,
+			modifier_key_t mods, void *param);
 void	render_non_doors(t_cub3d *game);
+void	install_hooks(t_cub3d *game);
+void	init_game(t_cub3d *game, int ac);
+void	init_textures(t_cub3d *game);
+double	cast_single_ray(t_cub3d *game, double ray_angle);
 
 #endif

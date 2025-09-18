@@ -14,7 +14,7 @@
 
 void	player_rotation(t_cub3d *game)
 {
-	const double rotation_speed = 2.0;
+	const double	rotation_speed = 2.0;
 
 	if (game->mechanics.look_right)
 		game->player_angle += rotation_speed * game->mlx->delta_time;

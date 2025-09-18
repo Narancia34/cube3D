@@ -42,7 +42,7 @@ static void	load_gun_frames_utils(t_cub3d *game, mlx_texture_t *gun)
 
 void	load_gun_frames(t_cub3d *game)
 {
-	mlx_texture_t *gun;
+	mlx_texture_t	*gun;
 
 	gun = mlx_load_png("./textures/shitgun_animation/shitgun_animation_1.png");
 	game->textures.gun_frames[0] = mlx_texture_to_image(game->mlx, gun);
