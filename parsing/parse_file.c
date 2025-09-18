@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 09:41:01 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/12 19:38:11 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:07:02 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	parse_file(char **av, t_cub3d *game)
 	check_file(av, game);
 	parse_elements(game);
 	parse_map(game);
+	get_next_line(-1);
 	close(game->parse.cub_file);
 }

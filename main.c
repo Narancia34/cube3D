@@ -6,16 +6,26 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 13:45:33 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/16 16:53:04 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:06:31 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	init_game(t_cub3d *game, int ac)
+static void	init_images(t_cub3d *game)
 {
 	mlx_texture_t	*texture;
 
+	texture = mlx_load_png("./textures/door.png");
+	game->textures.door = mlx_texture_to_image(game->mlx, texture);
+	mlx_delete_texture(texture);
+	texture = mlx_load_png("./textures/door_sides.png");
+	game->textures.door_side = mlx_texture_to_image(game->mlx, texture);
+	mlx_delete_texture(texture);
+}
+
+static void	init_game(t_cub3d *game, int ac)
+{
 	(void)ac;
 	game->map = NULL;
 	game->textures.north_texture = NULL;
@@ -33,23 +43,15 @@ static void	init_game(t_cub3d *game, int ac)
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	game->textures.mini_map = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->ray.texture = NULL;
-
-	// WARN: destroy door images
-	texture = mlx_load_png("./textures/door.png");
-	game->textures.door = mlx_texture_to_image(game->mlx, texture);
-	mlx_delete_texture(texture);
-
-	texture = mlx_load_png("./textures/door_sides.png");
-	game->textures.door_side = mlx_texture_to_image(game->mlx, texture);
-	mlx_delete_texture(texture);
+	game->parse.floor_color = false;
+	game->parse.ceiling_color = false;
+	init_images(game);
 }
 
 void	close_game(void *param)
 {
 	destroy_game((t_cub3d *)param, 0);
 }
-
-// static void
 
 int main(int ac, char **av)
 {

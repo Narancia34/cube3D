@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:47:55 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/12 19:04:36 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:07:02 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static char	**extract_rgb(char **element, t_cub3d *game)
 		free_arr(element);
 		parse_error(1, game);
 	}
+	check_rgb_values(element, game);
 	colors = ft_split(element[1], ',');
-	check_rgb_values(colors, element, game);
 	if (NULL != colors[3])
 	{
 		free_arr(element);
@@ -77,6 +77,10 @@ static void	init_rgb(char **colors, char **element, t_cub3d *game)
 		free_arr(colors);
 		parse_error(4, game);
 	}
+	if ('F' == *element[0])
+		game->parse.floor_color = true;
+	else if ('C' == *element[0])
+		game->parse.ceiling_color = true;
 	free_arr(colors);
 }
 

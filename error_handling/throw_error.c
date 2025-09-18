@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 21:00:43 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/05 15:28:15 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:07:02 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ static void	parse_error_extra(int error_code)
 		printf(RED"Error:\nMap is not closed.\n"RESET);
 	else if (11 == error_code)
 		printf(RED"Error:\nMap content cannot be seperated by new lines.\n"RESET);
+	else if (12 == error_code)
+		printf(RED"Error:\nUnexpected character in one of R,G,B element.\n"RESET);
+	else if (13 == error_code)
+	{
+		printf(RED"Error:\nMissing element.\n"RESET);
+	}
 }
 
 void	parse_error(int error_code, t_cub3d *game)

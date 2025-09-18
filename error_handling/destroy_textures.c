@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 11:23:27 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/10 21:25:54 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:07:02 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ void	destroy_game(t_cub3d *game, int exit_status)
 	mlx_delete_image(game->mlx, game->textures.east_texture);
 	mlx_delete_image(game->mlx, game->textures.mini_map);
 	mlx_delete_image(game->mlx, game->ray.texture);
+	mlx_delete_image(game->mlx, game->textures.door);
+	mlx_delete_image(game->mlx, game->textures.door_side);
 	destroy_gun_frames(game);
 	free_arr(game->map);
 	mlx_close_window(game->mlx);
 	mlx_terminate(game->mlx);
-	// free(game->parse);
 	exit(exit_status);
 }

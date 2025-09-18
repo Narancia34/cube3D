@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_texture.c                                    :+:      :+:    :+:   */
+/*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 09:56:03 by fbicane           #+#    #+#             */
-/*   Updated: 2025/08/13 12:07:23 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/18 18:07:02 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ static char	**fetch_elemet(t_cub3d *game)
 	file_line = NULL;
 	element = NULL;
 	file_line = get_next_line(game->parse.cub_file);
-	// WARN: file_line dosent contain "\n"
-	// wrong check!
-	while (!ft_strncmp(file_line, "\n", 0))
+	while (!(*file_line))
 	{
 		free(file_line);
 		file_line = get_next_line(game->parse.cub_file);
@@ -40,11 +38,9 @@ static mlx_image_t	*init_texture(char **element, t_cub3d *game)
 	if (NULL != element[2])
 	{
 		free_arr(element);
-		// // WARN: check the get_next_line(-1);
 		get_next_line(-1);
 		parse_error(1, game);
 	}
-	// element[1][ft_strlen(element[1]) - 1] = '\0';
 	texture = mlx_load_png(element[1]);
 	if (NULL == texture)
 	{
@@ -74,6 +70,17 @@ static void	parse_texture(char **element, t_cub3d *game)
 		parse_error(4, game);
 }
 
+static void	check_parsed_elements(t_cub3d *game)
+{
+	if (!game->textures.north_texture
+		|| !game->textures.south_texture
+		|| !game->textures.east_texture
+		|| !game->textures.west_texture
+		|| !game->parse.ceiling_color
+		|| !game->parse.floor_color)
+		parse_error(13, game);
+}
+
 void	parse_elements(t_cub3d *game)
 {
 	char	**element;
@@ -89,5 +96,5 @@ void	parse_elements(t_cub3d *game)
 		element_parsed++;
 	}
 	free_arr(element);
-	// get_next_line(-1);
+	check_parsed_elements(game);
 }
