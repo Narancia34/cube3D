@@ -6,7 +6,7 @@
 /*   By: fbicane <fbicane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 18:57:23 by fbicane           #+#    #+#             */
-/*   Updated: 2025/09/18 19:01:09 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/19 21:53:08 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ static void	close_game(void *param)
 
 static void	update_game(void *param)
 {
-	t_cub3d *game = (t_cub3d *)param;
-
+	t_cub3d *game;
+	
+	game = (t_cub3d *)param;
 	player_rotation(game);
 	player_mouvement(game);
 	cast_rays(game);

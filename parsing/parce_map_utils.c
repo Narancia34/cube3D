@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flood_fill.c                                       :+:      :+:    :+:   */
+/*   parce_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgamraou <mgamraou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 17:14:15 by mgamraou          #+#    #+#             */
-/*   Updated: 2025/09/05 14:29:52 by fbicane          ###   ########.fr       */
+/*   Updated: 2025/09/19 21:51:57 by fbicane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ void	find_player_position(t_cub3d *game)
 				|| game->map[y][x] == 'E'
 				|| game->map[y][x] == 'W')
 			{
-				game->pxp = x;
-				game->pyp = y;
-				game->pxp = x;
-				game->pyp = y;
+				game->pxp = x + 0.5;
+				game->pyp = y + 0.5;
 				return ;
 			}
 			x++;
