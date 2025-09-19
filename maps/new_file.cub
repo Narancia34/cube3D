@@ -1,10 +1,13 @@
 NO ./textures/wolftex/pics/greystone.png
-SO ./textures/wolftex/pics/bluestone.png
-WE ./textures/wolftex/pics/eagle.png
-EA ./textures/wolftex/pics/mossy.png
+EA ./textures/gray_hitler.png
+SO ./textures/grayeagle.png
+WE ./textures/grayflag.png
+
 
 F 220,100,0
 C 225,30,0
+
+
 
         1111111111111111111111111
         1000000000110000000000001
