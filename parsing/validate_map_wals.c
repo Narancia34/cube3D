@@ -17,59 +17,61 @@ static void	check_first_line(char **map, t_cub3d *game)
 	int	i;
 
 	i = 0;
-	while (('?' != map[0][i] || map[0][i]) && '1' == map[0][i])
+	while (map[0][i] && '1' == map[0][i])
 		i++;
 	if (map[0][i] && '?' != map[0][i])
-	{
-		free_arr(map);
-		parse_error(10, game);
-	}
-}
-
-static void	check_last_line(int j, char **map, t_cub3d *game)
-{
-	int	i;
-
-	i = 1;
-	if (!map[j + 1])
-	{
-		if ('1' != map[j][0])
-		{
-			free_arr(map);
-			parse_error(10, game);
-		}
-		while (('?' != map[j][i] || map[j][i]) && '1' == map[j][i])
-			i++;
-		if (map[j][i] && '?' != map[j][i])
-		{
-			free_arr(map);
-			parse_error(10, game);
-		}
-	}
-}
-
-static void	check_midle_lines(int j, char **map, t_cub3d *game)
-{
-	int	i;
-
-	i = 1;
-	if ('1' != map[j][0])
 		return (free_arr(map), parse_error(10, game));
-	while ('?' != map[j][i] && map[j][i])
-		i++;
-	if (!map[j][i] && '1' == map[j][i - 1])
-		return ;
-	else if (!map[j][i] && ('0' == map[j][i - 1]
-				|| ft_strrchr("NEWS", map[j][i])))
-		return (free_arr(map), parse_error(10, game));
-	else if (map[j][i] && '?' == map[j][i])
+	while (map[0][i])
 	{
-		if ('1' != map[j][i - 1])
+		if (!map[1][i])
+			return ;
+		if ('?' != map[1][i] && '1' != map[1][i])
 			return (free_arr(map), parse_error(10, game));
-		while (map[j][i])
+		i++;
+	}
+}
+
+static void	check_last_line(int line, char **map, t_cub3d *game)
+{
+	int	i;
+
+	i = 0;
+	while (map[line][i] && '1' == map[line][i])
+		i++;
+	if (map[line][i] && '?' != map[line][i])
+		return (free_arr(map), parse_error(10, game));
+	while (map[line][i])
+	{
+		if (!map[line - 1][i])
+			return ;
+		if (('?' != map[line - 1][i] && '1' != map[line - 1][i]))
+			return (free_arr(map), parse_error(10, game));
+		i++;
+	}
+}
+
+static void	check_midle_lines(int line, char **map, t_cub3d *game)
+{
+	int	i;
+
+	i = 1;
+	if ('1' != map[line][0])
+		return (free_arr(map), parse_error(10, game));
+	while ('?' != map[line][i] && map[line][i])
+		i++;
+	if (!map[line][i] && '1' == map[line][i - 1])
+		return ;
+	else if (!map[line][i] && ('0' == map[line][i - 1]
+				|| ft_strrchr("NEWS", map[line][i])))
+		return (free_arr(map), parse_error(10, game));
+	else if (map[line][i] && '?' == map[line][i])
+	{
+		if ('1' != map[line][i - 1])
+			return (free_arr(map), parse_error(10, game));
+		while (map[line][i])
 		{
-			if (('?' == map[j - 1][i] || '1' == map[j - 1][i])
-					&& (('?' == map[j + 1][i] || '1' == map[j + 1][i])))
+			if (('?' == map[line - 1][i] || '1' == map[line - 1][i])
+					&& (('?' == map[line + 1][i] || '1' == map[line + 1][i])))
 				i++;
 			else
 				return (free_arr(map), parse_error(10, game));

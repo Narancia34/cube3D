@@ -19,8 +19,8 @@ static void	close_game(void *param)
 
 static void	update_game(void *param)
 {
-	t_cub3d *game;
-	
+	t_cub3d	*game;
+
 	game = (t_cub3d *)param;
 	player_rotation(game);
 	player_mouvement(game);
