@@ -15,9 +15,18 @@
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
+	int	s1_len;
+	int	s2_len;
 
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
 	if (n == 0)
-		n = ft_strlen(s1);
+	{
+		if (s1_len > s2_len)
+			n = s1_len;
+		else
+			n = s2_len;
+	}
 	if (!s1 && !s2)
 		return (0);
 	i = 0;
