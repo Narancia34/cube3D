@@ -19,7 +19,7 @@ static void	check_file(char **av, t_cub3d *game)
 	if (!av[1])
 		parse_error(6, game);
 	len = ft_strlen(av[1]);
-	if (len < 5 && ft_strncmp(av[1] + (len - 4), ".cub", 4))
+	if (len < 5 || ft_strncmp(av[1] + (len - 4), ".cub", 4))
 		parse_error(6, game);
 	game->parse.cub_file = open(av[1], O_RDONLY);
 	if (-1 == game->parse.cub_file)
